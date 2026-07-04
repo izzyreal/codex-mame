@@ -1,0 +1,10 @@
+{
+  "plugin": {
+    "name": "mpcprobe",
+    "description": "Probe MPC2000XL inputs and screen state",
+    "version": "0.0.1",
+    "author": "Codex",
+    "type": "plugin",
+    "start": "false"
+  }
+}
