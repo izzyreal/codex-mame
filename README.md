@@ -83,6 +83,8 @@ thinking, not for button mashing.
 - `plugins/mpcprobe`: small Lua plugin for dumping I/O ports, pressing inputs, and capturing the screen
 - `WORKFLOWS.md`: concrete operational recipes that should be reused rather than rediscovered
 - `findings/`: reverse-engineering notes and discovered screen flows
+- `findings/firmware/mpc2000xl-data-wheel-re.md`: focused firmware-side note
+  for the MPC2000XL data wheel path
 
 ## Reference Assets
 
@@ -196,8 +198,7 @@ If you launch MAME with `run_mpc2000xl.sh`, `mpcprobe` exposes:
 mpcprobe.dump_ports()
 mpcprobe.write_port_dump("mpc2000xl-ports.txt")
 mpcprobe.list_fields("play")
-mpcprobe.set("Dial", 1)
-mpcprobe.clear("Dial")
+mpcprobe.list_fields("data wheel")
 mpcprobe.press("Play Start", 2)
 mpcprobe.dump_screen("mpcprobe.png")
 mpcprobe.screen_sig()
@@ -227,8 +228,43 @@ baseline before the button press is queued.
 `wait_change()` polls the LCD every 4 frames by default, which is about 50 ms
 on this machine's 80 Hz display timing.
 
+Do not use `wait_change()` as your main synchronizer on the settled main
+`sequencer` screen. The `Timing:` field updates continuously there, so the LCD
+is always changing even when the cursor and the rest of the screen are stable.
+On the main screen, prefer a small explicit frame wait when you are probing a
+single control effect.
+
 `wait_stable()` still polls every 40 frames by default, which is about 500 ms
 on this machine's 80 Hz display timing.
+
+Occasionally the live console prints a stray `linenoise` Lua error while still
+accepting queued commands normally. Treat that as console noise unless a queued
+action actually fails to run or the LCD does not change as expected.
+
+## Data Wheel
+
+The reliable practical wheel primitive is now stateless.
+
+Use the helper in:
+
+- `/Users/izmar/git/codex-mame/scripts/lib/mpc_actions.lua`
+
+Current reliable behavior on the main `Sq:` field:
+
+- `Data Wheel +1` means exactly one clockwise detent
+- `Data Wheel -1` means exactly one counter-clockwise detent
+- `mpcprobe.dial(n)` is built on top of those synthetic inputs
+- `actions.turn_dial(n)` and `actions.nudge_dial_positive/negative(...)` are
+  stateless wrappers around the same inputs
+- `actions.set_sq(current, target)` is a small convenience wrapper for the main
+  `Sq:` field when the current and target sequence numbers are already known
+
+The old absolute `Dial` analog field is no longer the preferred automation
+surface.
+
+If this ever stops behaving symmetrically, consult:
+
+- `/Users/izmar/git/codex-mame/findings/firmware/mpc2000xl-data-wheel-re.md`
 
 `wait_sequencer_ready()` is the boot-completion primitive for this workspace. It
 waits until the LCD matches the settled main `sequencer` screen and then
@@ -279,6 +315,8 @@ Useful field names already confirmed on `mpc2000xl` include:
 - `Main Screen`
 - `Window`
 - `Dial`
+- `Data Wheel -1`
+- `Data Wheel +1`
 - `Pad 1` through `Pad 16`
 
 

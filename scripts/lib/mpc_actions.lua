@@ -2,6 +2,7 @@ local actions = {}
 local DEFAULT_POLL_FRAMES = 40
 local DEFAULT_CHANGE_POLL_FRAMES = 4
 local SEQUENCER_READY_SIG = "66ace03b"
+local DEFAULT_DIAL_SETTLE_FRAMES = 2
 
 local function resolve_field(field_name)
     if not mpcprobe then
@@ -150,17 +151,31 @@ end
 
 function actions.turn_dial(delta, settle_frames)
     settle_frames = settle_frames or 2
-    local _, field = resolve_field("Dial")
-    local step = 1
-    if delta < 0 then
-        step = -1
-    end
+    local field_name = delta < 0 and "Data Wheel -1" or "Data Wheel +1"
+    local _, field = resolve_field(field_name)
     for _ = 1, math.abs(delta) do
-        field:set_value(step)
+        field:set_value(1)
         actions.wait_frames(1)
         field:clear_value()
         actions.wait_frames(settle_frames)
     end
+end
+
+function actions.set_sq(current_sq_number, target_sq_number, settle_frames)
+    if current_sq_number == nil or target_sq_number == nil then
+        error("current_sq_number and target_sq_number are required")
+    end
+    return actions.turn_dial(target_sq_number - current_sq_number, settle_frames or DEFAULT_DIAL_SETTLE_FRAMES)
+end
+
+function actions.nudge_dial_positive(steps, settle_frames)
+    steps = steps or 1
+    return actions.turn_dial(steps, settle_frames or DEFAULT_DIAL_SETTLE_FRAMES)
+end
+
+function actions.nudge_dial_negative(steps, settle_frames)
+    steps = steps or 1
+    return actions.turn_dial(-steps, settle_frames or DEFAULT_DIAL_SETTLE_FRAMES)
 end
 
 return actions

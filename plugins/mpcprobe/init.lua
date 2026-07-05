@@ -15,6 +15,7 @@ local action_state = nil
 local DEFAULT_POLL_FRAMES = 40
 local DEFAULT_CHANGE_POLL_FRAMES = 4
 local SEQUENCER_READY_SIG = "66ace03b"
+local AUTORUN_PATH = "/tmp/mpcprobe_autorun.lua"
 
 local function current_screen_signature()
     local screen = manager.machine.screens[":screen"]
@@ -510,9 +511,10 @@ end
 
 local function process_dial(action)
     if not action_state then
-        local _, field = find_field_by_name("Dial")
+        local field_name = action.delta < 0 and "Data Wheel -1" or "Data Wheel +1"
+        local _, field = find_field_by_name(field_name)
         if not field then
-            emu.print_error("mpcprobe: field not found: Dial")
+            emu.print_error("mpcprobe: field not found: " .. field_name)
             return true
         end
         local remaining_steps = math.abs(action.delta)
@@ -524,10 +526,15 @@ local function process_dial(action)
             remaining = 1,
             remaining_steps = remaining_steps,
             settle_frames = action.settle_frames,
-            direction = action.delta < 0 and -1 or 1,
-            field = field
+            field = field,
+            just_started = true
         }
-        field:set_value(action_state.direction)
+        field:set_value(1)
+    end
+
+    if action_state.just_started then
+        action_state.just_started = false
+        return false
     end
 
     action_state.remaining = action_state.remaining - 1
@@ -549,7 +556,8 @@ local function process_dial(action)
 
     action_state.phase = "pulse"
     action_state.remaining = 1
-    action_state.field:set_value(action_state.direction)
+    action_state.just_started = true
+    action_state.field:set_value(1)
     return false
 end
 
@@ -623,6 +631,14 @@ function mpcprobe.startplugin()
         }
         emu.print_info("mpcprobe: ready")
         emu.print_info("mpcprobe: use mpcprobe.dump_ports(), mpcprobe.combo(\"Shift\", \"3 / Load\"), mpcprobe.tap(\"Window\"), mpcprobe.wait_change(), mpcprobe.wait_stable(), mpcprobe.wait_sequencer_ready(), mpcprobe.dial(3), mpcprobe.snap(\"lcd.png\"), mpcprobe.queue_status()")
+        local autorun = loadfile(AUTORUN_PATH)
+        if autorun then
+            emu.print_info("mpcprobe: running autorun script " .. AUTORUN_PATH)
+            local ok, err = pcall(autorun)
+            if not ok then
+                emu.print_error("mpcprobe: autorun failed: " .. tostring(err))
+            end
+        end
     end)
 end
 
