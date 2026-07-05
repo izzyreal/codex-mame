@@ -1,5 +1,6 @@
 local actions = {}
 local DEFAULT_POLL_FRAMES = 40
+local DEFAULT_CHANGE_POLL_FRAMES = 4
 local SEQUENCER_READY_SIG = "66ace03b"
 
 local function resolve_field(field_name)
@@ -80,7 +81,7 @@ end
 
 function actions.wait_for_change(max_polls, poll_frames, baseline)
     max_polls = max_polls or 20
-    poll_frames = poll_frames or DEFAULT_POLL_FRAMES
+    poll_frames = poll_frames or DEFAULT_CHANGE_POLL_FRAMES
     baseline = baseline or actions.screen_signature()
     for _ = 1, max_polls do
         actions.wait_frames(poll_frames)

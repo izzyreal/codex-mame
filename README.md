@@ -2,6 +2,33 @@
 
 Minimal MAME automation workspace for probing `mpc2000xl`.
 
+## Operating Principle
+
+Prefer local scripting over Codex-driven step-by-step interaction whenever the
+task is deterministic, repeatable, or latency-sensitive.
+
+The central tension in this workspace is:
+
+- Codex can reason, adapt, and choose good experiments
+- every Codex-in-the-loop step also adds human wall-clock time through cloud
+  round trips, tool polling, cautious verification, and back-and-forth control
+
+That overhead is acceptable when judgment is needed. It is wasteful when the
+task is already known and mechanical.
+
+Practical split:
+
+- Codex chooses experiments, interprets results, and steers reverse engineering
+- local Lua scripts and helpers perform mechanical work such as boot waits,
+  navigation, snapshots, and repeatable probing sequences
+
+If a human could describe a sequence once and expect it to work the same way
+again, that sequence should usually become a local script instead of being
+driven interactively through Codex.
+
+In short: Codex decides, local scripts execute. Keep Codex in the loop for
+thinking, not for button mashing.
+
 ## Layout
 
 - `plugins/mpcprobe`: small Lua plugin for dumping I/O ports, pressing inputs, and capturing the screen
@@ -122,8 +149,11 @@ For live console use, `tap_wait_change()` is preferred over entering `tap()`
 and `wait_change()` as separate console commands, because it captures the LCD
 baseline before the button press is queued.
 
-`wait_change()` and `wait_stable()` poll the LCD every 40 frames by default,
-which is about every 500 ms on this machine's 80 Hz display timing.
+`wait_change()` polls the LCD every 4 frames by default, which is about 50 ms
+on this machine's 80 Hz display timing.
+
+`wait_stable()` still polls every 40 frames by default, which is about 500 ms
+on this machine's 80 Hz display timing.
 
 `wait_sequencer_ready()` is the boot-completion primitive for this workspace. It
 waits until the LCD matches the settled main `sequencer` screen and then
@@ -146,6 +176,18 @@ Practical rule:
 
 At the time this was written, the issue appeared transient and was not
 reproducible after a clean restart.
+
+## Timing Notes
+
+Measured on July 5, 2026:
+
+- scripted `boot -> move cursor -> shutdown` took about 5.4 s wall-clock
+- the larger scripted smoke sequence took about 9.9 s wall-clock
+
+That means minute-long runs are not an emulator limitation here. They are more
+likely to come from outer orchestration overhead such as conservative PTY poll
+intervals, extra verification steps, or repeated empty waits from the driving
+agent.
 
 The first task is to run `mpcprobe.dump_ports()` and inspect the actual field names exposed by the `mpc2000xl` driver.
 

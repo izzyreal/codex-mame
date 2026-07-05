@@ -13,6 +13,7 @@ local queued_actions = {}
 local active_action = nil
 local action_state = nil
 local DEFAULT_POLL_FRAMES = 40
+local DEFAULT_CHANGE_POLL_FRAMES = 4
 local SEQUENCER_READY_SIG = "66ace03b"
 
 local function current_screen_signature()
@@ -217,7 +218,7 @@ local function queue_wait_change(max_polls, poll_frames)
         kind = "wait_change",
         baseline = current_screen_signature(),
         max_polls = max_polls or 20,
-        poll_frames = poll_frames or DEFAULT_POLL_FRAMES
+        poll_frames = poll_frames or DEFAULT_CHANGE_POLL_FRAMES
     })
 end
 
@@ -256,7 +257,7 @@ local function queue_tap_wait_change(field_name, hold_frames, settle_frames, max
         kind = "wait_change",
         baseline = baseline,
         max_polls = max_polls or 20,
-        poll_frames = poll_frames or DEFAULT_POLL_FRAMES
+        poll_frames = poll_frames or DEFAULT_CHANGE_POLL_FRAMES
     })
 end
 
