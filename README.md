@@ -2,6 +2,55 @@
 
 Minimal MAME automation workspace for probing `mpc2000xl`.
 
+## Start Here
+
+If you are resuming this workspace after a long gap or after context
+compaction, re-read this section first and treat it as the operating contract.
+
+Core loop:
+
+1. perform exactly one intentional interaction
+2. capture or inspect the LCD result
+3. interpret the new state
+4. decide the next interaction from the observed state, not from memory or hope
+
+This workspace should be operated like a diligent human engineer using the LCD
+as ground truth, not like a speculative batch runner.
+
+Mandatory references before guessing UI movement:
+
+- `/Users/izmar/git/vmpc-juce/editables/mpc/resources/screens/layer1.json`
+- `/Users/izmar/git/vmpc-juce/editables/mpc/resources/screens/layer2.json`
+- `/Users/izmar/git/vmpc-juce/editables/mpc/resources/screens/layer3.json`
+- `/Users/izmar/git/vmpc-juce/editables/mpc/resources/screens/layer4.json`
+
+These files are ordered by z-index. Their neighbor arrays are the navigation
+oracle for cursor movement:
+
+- index `0`: left
+- index `1`: right
+- index `2`: up
+- index `3`: down
+
+Timing rules:
+
+- use fast change detection for ordinary interaction feedback:
+  about `4` frames, roughly `50 ms`
+- use slower stability checks only for boot completion or “has the UI settled?”:
+  about `40` frames, roughly `500 ms`
+
+Do not:
+
+- do not rely on remembered cursor position or remembered directory state
+- do not press `DO IT`, `LOAD`, `CLEAR`, `SAVE`, or similar state-changing soft
+  keys without visible LCD verification first
+- do not script speculative multi-step paths and hope they land correctly
+- do not consolidate a flow into a local script until the same path has already
+  been verified repeatedly through LCD feedback
+
+Use local scripts only after a flow is already understood and repeatable. Use
+Codex-in-the-loop interaction when judgment is still required.
+
 ## Operating Principle
 
 Prefer local scripting over Codex-driven step-by-step interaction whenever the
@@ -32,6 +81,8 @@ thinking, not for button mashing.
 ## Layout
 
 - `plugins/mpcprobe`: small Lua plugin for dumping I/O ports, pressing inputs, and capturing the screen
+- `WORKFLOWS.md`: concrete operational recipes that should be reused rather than rediscovered
+- `findings/`: reverse-engineering notes and discovered screen flows
 
 ## Reference Assets
 
