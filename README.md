@@ -33,6 +33,30 @@ thinking, not for button mashing.
 
 - `plugins/mpcprobe`: small Lua plugin for dumping I/O ports, pressing inputs, and capturing the screen
 
+## Reference Assets
+
+These files are important context for reverse-engineering work in this
+workspace:
+
+- `/Users/izmar/git/codex-mame/MAME.pdf`
+  Use this for MAME Lua scripting and automation details.
+- `/Users/izmar/git/codex-mame/akai_mpc2000xl_manual.pdf`
+  Use this for MPC2000XL user-facing workflows, button meanings, and screen
+  navigation expectations.
+- `/Users/izmar/git/vmpc-juce/editables/mpc/resources/screens/layer1.json`
+  Lowest z-layer metadata for the main MPC screens.
+- `/Users/izmar/git/vmpc-juce/editables/mpc/resources/screens/layer2.json`
+  Next z-layer metadata for windows and overlays above the main screens.
+- `/Users/izmar/git/vmpc-juce/editables/mpc/resources/screens/layer3.json`
+  Higher z-layer metadata for deeper dialogs and overlays.
+- `/Users/izmar/git/vmpc-juce/editables/mpc/resources/screens/layer4.json`
+  Highest z-layer metadata for the remaining topmost overlays.
+
+These `layer1.json` through `layer4.json` files are ordered by z-index.
+
+For the `layer*.json` files, field neighbor arrays are especially useful when
+predicting cursor movement without trial-and-error on the LCD.
+
 ## Run
 
 For normal interactive work, use the wrapper script:
