@@ -176,6 +176,55 @@ single-sound flow:
 - parameter: `assign-to-note`
 - soft keys: `PLAY`, `DSCARD`, `KEEP`
 
+## VMPC2000XL Background Asset Note
+
+The first implementation pass used MAME-derived screenshots as background PNGs
+for these new screens:
+
+- `load-a-set`
+- `conversion-table`
+- `load-a-set-replace-add`
+- `load-a-set-sound`
+
+This caused visible corruption when opening `load-a-set` over the normal LOAD
+screen. The parent LOAD screen soft-key strip and other pixels showed through
+the modal background.
+
+Root cause:
+
+- VMPC2000XL background rendering is not alpha-based.
+- `Background.cpp` only acts on exact RGB black and exact RGB white.
+- Existing background assets use `(65, 65, 65)` as an intentional no-op color
+  outside the region owned by the window.
+- The captured SET backgrounds contained LCD tint colors, antialias colors, and
+  parent-screen pixels, including values such as `(253, 253, 253)`.
+- Those values were ignored by the renderer, leaving stale pixels from the
+  underlying LOAD screen.
+
+Fix applied in `editables/mpc`:
+
+- `load-a-set`, `conversion-table`, and `load-a-set-replace-add` were cleaned
+  by keeping the discovered modal content but forcing the asset into the
+  established `0/65/255` palette.
+- `load-a-set-sound` was replaced with the existing clean `load-a-sound` style
+  frame because its dynamic fields are driven by `layer2.json` and should not
+  be baked into the PNG.
+- The `layer2.json` idiom was preserved: absent function-key labels and types
+  remain `null`.
+
+Practical rule for future screens:
+
+- MAME screenshots are excellent references for layout and text.
+- They are not safe final `resources/screens/bg` assets unless parent-layer
+  regions are masked to `(65, 65, 65)` and owned pixels are reduced to exact
+  black or exact white.
+- Do not bake soft/function keys into background PNGs; they are procedural.
+
+This finding also points toward a better long-term approach: extract the real
+MPC2000XL font and border-decoration glyphs from firmware and generate these
+windows from character-level data, which is likely closer to how the original
+firmware builds the LCD.
+
 ## Conclusion
 
 For practical implementation purposes, the `.SET` flow is now sufficiently

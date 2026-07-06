@@ -104,17 +104,41 @@ Renderer facts confirmed from the code:
 - backgrounds are loaded by `Background.cpp` from `screens/bg/<name>.png`
 - the soft keys are drawn separately by `FunctionKeys.cpp`
 - the six soft-key boxes occupy the bottom strip at `y = 51..59`
+- `Background.cpp` only acts on exact RGB values:
+  - `(0, 0, 0)` means draw a black LCD pixel
+  - `(255, 255, 255)` means clear/draw a white LCD pixel
+  - other values are effectively no-ops and leave whatever was already in the
+    LCD buffer
+- established background PNGs use `(65, 65, 65)` as the deliberate no-op color
+  outside the modal/window area
 
 Fast bootstrap method from MAME captures:
 
 1. Capture the LCD screen in MAME.
-2. Use the capture as the base image.
-3. Replace the bottom `9` pixel rows with the corresponding `y = 51..59` strip
-   from an existing popup-style background such as
-   `load-a-program.png`.
-4. Save the result as a new `248x60` PNG in `resources/screens/bg`.
+2. Treat the capture as a reference, not as a final asset.
+3. Mask out parent-layer regions with the project no-op color `(65, 65, 65)`.
+4. Convert every owned pixel in the modal/window area to exact black or white.
+5. Replace the bottom `9` pixel rows with the corresponding `y = 51..59` strip
+   from an existing popup-style background such as `load-a-program.png`, unless
+   the asset intentionally owns a different bottom border.
+6. Save the result as a new `248x60` PNG in `resources/screens/bg`.
 
-This is a pragmatic bootstrap method. It preserves any dynamic body text or
-current highlight state that was present in the capture. That is acceptable for
-quick asset generation, but a final polished asset may later need manual
-cleanup if the body text should become dynamic.
+This is a pragmatic bootstrap method, but raw screenshots must not be committed
+as backgrounds. Screenshot-colored or anti-aliased PNGs contain arbitrary RGB
+values such as `(253, 253, 253)` and LCD tint colors. Because the renderer
+ignores any value other than exact black or white, those pixels let stale
+underlying screen pixels show through.
+
+For final assets, prefer one of these:
+
+- clean hand-authored `0/65/255` PNGs following an existing background template
+- generated assets from the real MPC2000XL font/border character data, if that
+  data has been extracted and modeled
+
+Longer-term direction:
+
+- The 2000XL firmware likely builds most ordinary windows character-by-character
+  using internal font/border glyphs.
+- If the firmware font and border-decoration glyphs are extracted, VMPC2000XL
+  should eventually generate these backgrounds from the same character-level
+  model instead of using captured bitmap approximations.
