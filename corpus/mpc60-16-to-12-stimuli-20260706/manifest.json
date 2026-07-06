@@ -1,0 +1,70 @@
+{
+  "snd": "/tmp/mpc60-16-to-12-stimuli-20260706/STIM001_MPC3000.SND",
+  "snd_size": 140606,
+  "snd_sha1": "d1ccc7e138fdb87f7834b2e6026cd4cfa6e730fe",
+  "wav_probe": "/tmp/mpc60-16-to-12-stimuli-20260706/STIM001_source_s16le_44100.wav",
+  "wav_probe_sha1": "b1dbbbe449e521fe300394003bd133a76bf285b3",
+  "format": "provisional MPC3000 SND v2, mono signed 16-bit little-endian payload",
+  "header_size": 38,
+  "frame_count": 70284,
+  "payload_size": 140568,
+  "header_unknown_2_reused_from_sound017": "0x001b3690",
+  "segments": [
+    {
+      "name": "zero_guard_start",
+      "start_index": 0,
+      "end_index_exclusive": 32,
+      "sample_count": 32,
+      "description": "Initial zeros to make payload start/order obvious."
+    },
+    {
+      "name": "small_signed_constants",
+      "start_index": 32,
+      "end_index_exclusive": 92,
+      "sample_count": 60,
+      "description": "Small values around zero, repeated to expose rounding/sign behavior."
+    },
+    {
+      "name": "edge_constants",
+      "start_index": 92,
+      "end_index_exclusive": 196,
+      "sample_count": 104,
+      "description": "Signed 16-bit edges and likely quantizer boundaries."
+    },
+    {
+      "name": "full_signed_16_ramp",
+      "start_index": 196,
+      "end_index_exclusive": 65732,
+      "sample_count": 65536,
+      "description": "Every possible signed 16-bit PCM value exactly once."
+    },
+    {
+      "name": "left_justified_12bit_codes",
+      "start_index": 65732,
+      "end_index_exclusive": 69828,
+      "sample_count": 4096,
+      "description": "All 4096 possible signed 12-bit values represented as left-justified 16-bit PCM."
+    },
+    {
+      "name": "byte_pattern_probe",
+      "start_index": 69828,
+      "end_index_exclusive": 69996,
+      "sample_count": 168,
+      "description": "Repeated bit-pattern values to help identify byte/nibble order."
+    },
+    {
+      "name": "alternating_extremes",
+      "start_index": 69996,
+      "end_index_exclusive": 70252,
+      "sample_count": 256,
+      "description": "Alternating extremes to expose pair packing order."
+    },
+    {
+      "name": "zero_guard_end",
+      "start_index": 70252,
+      "end_index_exclusive": 70284,
+      "sample_count": 32,
+      "description": "Trailing zeros to make end alignment obvious."
+    }
+  ]
+}

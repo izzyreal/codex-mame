@@ -1,0 +1,6 @@
+name,start_index,end_index_exclusive,sample_count,description
+negative_full_scale_anchor,0,256,256,Literal full-scale negative anchor for MPC60 normalization.
+positive_full_scale_anchor,256,512,256,Literal full-scale positive anchor for MPC60 normalization.
+zero_guard_start,512,768,256,Zero guard before codebook plateaus.
+all_12bit_left_justified_long_plateaus,768,393984,393216,"All signed 12-bit values left-justified into 16-bit PCM, each repeated 96 times. Use late plateau interiors to avoid transition/filter effects."
+zero_guard_end,393984,394240,256,Trailing zero guard.

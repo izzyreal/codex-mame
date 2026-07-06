@@ -1,0 +1,17 @@
+{
+  "source_stimulus": "/Users/izmar/git/codex-mame/corpus/mpc60-16-to-12-stimuli3-20260706/STIM003_MPC3000.SND",
+  "resave_image": {
+    "path": "mpc60_stim003_resave.img",
+    "size": 819200,
+    "sha1": "672254336e9c6d13ad333cfd754f06fb4d405a43"
+  },
+  "files": [
+    {
+      "path": "files/MAIM003.SND",
+      "size": 591399,
+      "sha1": "355f6650165115fee428982bae43e48f850e6461"
+    }
+  ],
+  "expected_size": 591399,
+  "readback": "gw read --format ibm.scan, Found 1600 sectors of 1600 (100%)"
+}

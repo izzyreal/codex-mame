@@ -1,0 +1,194 @@
+{
+  "pairs": 188,
+  "samples": 5082576,
+  "rmse": 33.82100657811043,
+  "corr": 0.9999267347956622,
+  "coef_ar1x1": [
+    0.6174109083201237,
+    6.763017568618126,
+    0.4805730137050285,
+    0.2398033748614675
+  ],
+  "worst": [
+    {
+      "folder": "loft-dr",
+      "snd": "safeam2k.SND",
+      "entry": 6,
+      "set_name": "SafeAm2KICK",
+      "count": 16000,
+      "rmse": 103.62601485970922,
+      "corr": 0.9998182074143045
+    },
+    {
+      "folder": "live-dr",
+      "snd": "AZ-KICK.SND",
+      "entry": 6,
+      "set_name": "AZ-KICK",
+      "count": 20000,
+      "rmse": 53.93638883606604,
+      "corr": 0.9999408217029127
+    },
+    {
+      "folder": "samba",
+      "snd": "SAMBACRA.snd",
+      "entry": 2,
+      "set_name": "sambacrash",
+      "count": 128000,
+      "rmse": 47.276884458016255,
+      "corr": 0.9994901640684555
+    },
+    {
+      "folder": "synth",
+      "snd": "BASS2.SND",
+      "entry": 0,
+      "set_name": "BASS2",
+      "count": 11320,
+      "rmse": 41.61720185003106,
+      "corr": 0.9999964432486464
+    },
+    {
+      "folder": "uk-7",
+      "snd": "UK-TM486.SND",
+      "entry": 29,
+      "set_name": "UK-TM486",
+      "count": 20000,
+      "rmse": 41.12178919973767,
+      "corr": 0.999995904711582
+    },
+    {
+      "folder": "uk-7",
+      "snd": "UK-TM483.SND",
+      "entry": 16,
+      "set_name": "UK-TM483",
+      "count": 20000,
+      "rmse": 40.293109970770125,
+      "corr": 0.9999944103599533
+    },
+    {
+      "folder": "uk-7",
+      "snd": "UK-TM489.SND",
+      "entry": 30,
+      "set_name": "UK-TM489",
+      "count": 20000,
+      "rmse": 39.64518413733443,
+      "corr": 0.9999944748712973
+    },
+    {
+      "folder": "rock",
+      "snd": "BASSGUIT.SND",
+      "entry": 0,
+      "set_name": "BASSGUIT",
+      "count": 8000,
+      "rmse": 39.50484364624499,
+      "corr": 0.9999933396849826
+    },
+    {
+      "folder": "studio",
+      "snd": "BASSGUIT.SND",
+      "entry": 0,
+      "set_name": "BASSGUIT",
+      "count": 8000,
+      "rmse": 39.50484364624499,
+      "corr": 0.9999933396849826
+    },
+    {
+      "folder": "synth",
+      "snd": "SY_SNR1.SND",
+      "entry": 30,
+      "set_name": "SY_SNR1",
+      "count": 20000,
+      "rmse": 38.84536800144601,
+      "corr": 0.9999200398618967
+    },
+    {
+      "folder": "samba",
+      "snd": "CABASA2.SND",
+      "entry": 26,
+      "set_name": "CABASA2",
+      "count": 7320,
+      "rmse": 38.11699026017653,
+      "corr": 0.9998139147995285
+    },
+    {
+      "folder": "uk-8",
+      "snd": "S7_CHINA.SND",
+      "entry": 10,
+      "set_name": "S7_CHINA",
+      "count": 20000,
+      "rmse": 37.210614086625895,
+      "corr": 0.9994248819689062
+    },
+    {
+      "folder": "samba",
+      "snd": "TAMB_HIT.SND",
+      "entry": 17,
+      "set_name": "TAMB_HIT",
+      "count": 11320,
+      "rmse": 37.18823425212915,
+      "corr": 0.9990009050285886
+    },
+    {
+      "folder": "studio",
+      "snd": "SIDESTK1.SND",
+      "entry": 27,
+      "set_name": "SIDESTK1",
+      "count": 20000,
+      "rmse": 36.95716298057708,
+      "corr": 0.9997092551073024
+    },
+    {
+      "folder": "uk-8",
+      "snd": "WHIP_CLA.snd",
+      "entry": 14,
+      "set_name": "WHIP_CLAP",
+      "count": 16000,
+      "rmse": 36.94582410908944,
+      "corr": 0.9962732339659334
+    },
+    {
+      "folder": "uk-8",
+      "snd": "S7_RIDE1.SND",
+      "entry": 7,
+      "set_name": "S7_RIDE1",
+      "count": 40000,
+      "rmse": 36.70210130415545,
+      "corr": 0.9967975695124167
+    },
+    {
+      "folder": "synth",
+      "snd": "CRASH3.SND",
+      "entry": 16,
+      "set_name": "CRASH3",
+      "count": 123000,
+      "rmse": 36.670395290220654,
+      "corr": 0.9994007946931543
+    },
+    {
+      "folder": "uk-8",
+      "snd": "S7_HH_OP.SND",
+      "entry": 2,
+      "set_name": "S7_HH_OP",
+      "count": 40000,
+      "rmse": 36.62904784080463,
+      "corr": 0.99951158783868
+    },
+    {
+      "folder": "loft-dr",
+      "snd": "CABASA-S.SND",
+      "entry": 15,
+      "set_name": "Cabasa-S",
+      "count": 8000,
+      "rmse": 36.44720782016584,
+      "corr": 0.9997591420258884
+    },
+    {
+      "folder": "dry",
+      "snd": "SOUND008.SND",
+      "entry": 28,
+      "set_name": "sound008",
+      "count": 8720,
+      "rmse": 36.33284564330042,
+      "corr": 0.9999802199774195
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+name,start_index,end_index_exclusive,sample_count,description
+zero_guard_start,0,64,64,Initial zero plateau for alignment and settle.
+all_12bit_left_justified_plateaus,64,65600,65536,"All signed 12-bit values left-justified into 16-bit PCM, each repeated 16 times. Input code for plateau p is p-2048; sample value is (p-2048)<<4."
+rounding_probe,65600,67032,1432,Short plateaus around selected low-nibble/rounding boundaries.
+alternating_extremes,67032,67288,256,Alternating extremes for pair packing/order.
+zero_guard_end,67288,67352,64,Trailing zero plateau for end alignment.

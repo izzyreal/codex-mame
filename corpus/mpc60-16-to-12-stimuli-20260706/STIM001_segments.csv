@@ -1,0 +1,9 @@
+name,start_index,end_index_exclusive,sample_count,description
+zero_guard_start,0,32,32,Initial zeros to make payload start/order obvious.
+small_signed_constants,32,92,60,"Small values around zero, repeated to expose rounding/sign behavior."
+edge_constants,92,196,104,Signed 16-bit edges and likely quantizer boundaries.
+full_signed_16_ramp,196,65732,65536,Every possible signed 16-bit PCM value exactly once.
+left_justified_12bit_codes,65732,69828,4096,All 4096 possible signed 12-bit values represented as left-justified 16-bit PCM.
+byte_pattern_probe,69828,69996,168,Repeated bit-pattern values to help identify byte/nibble order.
+alternating_extremes,69996,70252,256,Alternating extremes to expose pair packing order.
+zero_guard_end,70252,70284,32,Trailing zeros to make end alignment obvious.

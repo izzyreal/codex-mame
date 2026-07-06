@@ -1,0 +1,35 @@
+{
+  "mpc3000": {
+    "size": 176438,
+    "sha1": "09af75f69ac3c6909f9dd3f6b4d2921b5877bc2d",
+    "magic": "01 02",
+    "name": "sound017        \u0000",
+    "level": 100,
+    "start": 0,
+    "end": 88200,
+    "frame_count": 88200,
+    "unknown_2": 1783440
+  },
+  "mpc60": {
+    "size": 132339,
+    "sha1": "e13112ae315127e8fb3490441da342e3771ce396",
+    "magic": "01 01",
+    "name": "JAUND017        \u0000",
+    "sample_count": 88200,
+    "unknown_1": 0,
+    "duration_milliseconds_minus_one": 2205,
+    "unknown_2": 20,
+    "level": 4452,
+    "unknown_3": 0,
+    "unknown_4": 0,
+    "unknown_5": 100
+  },
+  "derived": {
+    "mpc3000_payload_bytes": 176400,
+    "mpc60_payload_bytes": 132300,
+    "frame_count_equal": true,
+    "mpc3000_expected_size": 176438,
+    "mpc60_expected_size": 132339,
+    "mpc60_bytes_per_sample": 1.5
+  }
+}

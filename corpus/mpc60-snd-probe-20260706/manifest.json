@@ -1,0 +1,57 @@
+{
+  "image": "/tmp/mpc60_snd_probe_20260706.img",
+  "image_size": 819200,
+  "image_sha1": "f95106290013c321ea8d4a833e6ffaf48274e852",
+  "geometry": {
+    "bytes_per_sector": 512,
+    "sectors_per_cluster": 2,
+    "reserved_sectors": 1,
+    "fat_count": 2,
+    "root_entries": 112,
+    "sectors_per_fat": 3
+  },
+  "files": [
+    {
+      "name": "SEQ01.SEQ",
+      "size": 434,
+      "sha1": "6a85f1c7e0328840b97482c2eaf0c38294511402",
+      "first_32_hex": "03 03 01 11 00 00 00 00 00 00 00 53 45 51 30 31 20 20 20 20 20 20 20 20 20 20 20 00 09 01 00 02"
+    },
+    {
+      "name": "ALL_SEQS.ALL",
+      "size": 440,
+      "sha1": "f5f6f4e121727092d57ae6863f8f5249e29ba5e5",
+      "first_32_hex": "04 03 b1 01 00 00 01 11 00 00 00 00 00 00 00 53 45 51 30 31 20 20 20 20 20 20 20 20 20 20 20 00"
+    },
+    {
+      "name": "PROGRAM_.PGM",
+      "size": 4608,
+      "sha1": "b09382aa74760ab0fd2a68ae1f619cab83595aac",
+      "first_32_hex": "07 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00"
+    },
+    {
+      "name": "ALL_PGMS.APS",
+      "size": 17843,
+      "sha1": "3f239df3c8401ae83a819fd2fb2cf64c9f110adb",
+      "first_32_hex": "0a 00 08 a0 0f 00 00 41 4c 4c 5f 50 47 4d 53 00 00 00 00 00 00 00 00 00 00 02 02 02 00 0d 23 00"
+    },
+    {
+      "name": "SOUND002.SND",
+      "size": 6039,
+      "sha1": "3dae56c16ec9338f7c19e23e32cdfe528b05ea57",
+      "first_32_hex": "01 01 53 4f 55 4e 44 30 30 32 20 20 20 20 20 20 20 20 00 a0 0f 00 00 14 00 63 00 00 00 14 00 64"
+    },
+    {
+      "name": "PARAMS.PAR",
+      "size": 1734,
+      "sha1": "e64c498b739a72476dae1016301eb3b312c7246c",
+      "first_32_hex": "08 01 c2 06 53 59 4e 54 48 30 31 41 00 53 59 4e 54 48 30 32 41 00 53 59 4e 54 48 30 33 41 00 53"
+    },
+    {
+      "name": "SOUND003.SND",
+      "size": 120039,
+      "sha1": "e792d78c4ed1cdd914086b1c1a65a6e3d4ac8f62",
+      "first_32_hex": "01 01 73 6f 75 6e 64 30 30 33 20 20 20 20 20 20 20 20 00 80 38 01 00 00 00 cf 07 00 00 14 00 64"
+    }
+  ]
+}

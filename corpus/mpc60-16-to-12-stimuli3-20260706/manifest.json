@@ -1,0 +1,57 @@
+{
+  "snd": "/tmp/mpc60-16-to-12-stimuli3-20260706/STIM003_MPC3000.SND",
+  "snd_size": 788518,
+  "snd_sha1": "4a9c39bfde8fc2955ade9a9f9fb300082e5cec06",
+  "wav_probe": "/tmp/mpc60-16-to-12-stimuli3-20260706/STIM003_source_s16le_44100.wav",
+  "wav_probe_sha1": "9abd304a5cd4d1febc7a3d78488f4192b805aa18",
+  "format": "provisional MPC3000 SND v2, mono signed 16-bit little-endian payload",
+  "header_size": 38,
+  "frame_count": 394240,
+  "payload_size": 788480,
+  "plateau_repeat_count": 96,
+  "segments": [
+    {
+      "name": "negative_full_scale_anchor",
+      "start_index": 0,
+      "end_index_exclusive": 256,
+      "sample_count": 256,
+      "description": "Literal full-scale negative anchor for MPC60 normalization."
+    },
+    {
+      "name": "positive_full_scale_anchor",
+      "start_index": 256,
+      "end_index_exclusive": 512,
+      "sample_count": 256,
+      "description": "Literal full-scale positive anchor for MPC60 normalization."
+    },
+    {
+      "name": "zero_guard_start",
+      "start_index": 512,
+      "end_index_exclusive": 768,
+      "sample_count": 256,
+      "description": "Zero guard before codebook plateaus."
+    },
+    {
+      "name": "all_12bit_left_justified_long_plateaus",
+      "start_index": 768,
+      "end_index_exclusive": 393984,
+      "sample_count": 393216,
+      "description": "All signed 12-bit values left-justified into 16-bit PCM, each repeated 96 times. Use late plateau interiors to avoid transition/filter effects."
+    },
+    {
+      "name": "zero_guard_end",
+      "start_index": 393984,
+      "end_index_exclusive": 394240,
+      "sample_count": 256,
+      "description": "Trailing zero guard."
+    }
+  ],
+  "expected_mpc60_resave_size": 591399,
+  "floppy_image": {
+    "path": "mpc60_stim003_only.img",
+    "size": 819200,
+    "sha1": "53c5e307e818d7cc4fea0a5231d11f66a7d2026d",
+    "root_file": "STIM003.SND",
+    "verification": "root file extracted from image matched STIM003_MPC3000.SND byte-for-byte before archive"
+  }
+}

@@ -1,0 +1,1691 @@
+{
+  "source": "STIM002/MAIM002 plateau interiors using seq_c unpacker",
+  "plateau_count": 4096,
+  "repeat_per_plateau": 16,
+  "interior_samples_used_per_plateau": 8,
+  "stable_plateaus": 4096,
+  "unique_output_codes": 792,
+  "unique_output_signed": 792,
+  "min_output_signed": -2048,
+  "max_output_signed": 2047,
+  "delta_counts": [
+    [
+      0,
+      3236
+    ],
+    [
+      256,
+      691
+    ],
+    [
+      -3840,
+      53
+    ],
+    [
+      -256,
+      31
+    ],
+    [
+      512,
+      27
+    ],
+    [
+      513,
+      27
+    ],
+    [
+      257,
+      26
+    ],
+    [
+      -512,
+      1
+    ],
+    [
+      1,
+      1
+    ],
+    [
+      -513,
+      1
+    ],
+    [
+      3840,
+      1
+    ]
+  ],
+  "run_length_counts": [
+    [
+      6,
+      300
+    ],
+    [
+      5,
+      263
+    ],
+    [
+      4,
+      228
+    ],
+    [
+      1,
+      69
+    ]
+  ],
+  "first_64": [
+    {
+      "input_code": 0,
+      "input_signed12": -2048,
+      "input_s16": -32768,
+      "mpc60_code": 2789,
+      "mpc60_signed12": -1307,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2789 2789 2789 2789 2789 2789 2789 2789"
+    },
+    {
+      "input_code": 1,
+      "input_signed12": -2047,
+      "input_s16": -32752,
+      "mpc60_code": 3045,
+      "mpc60_signed12": -1051,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3045 3045 3045 3045 3045 3045 3045 3045"
+    },
+    {
+      "input_code": 2,
+      "input_signed12": -2046,
+      "input_s16": -32736,
+      "mpc60_code": 2789,
+      "mpc60_signed12": -1307,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2789 2789 2789 2789 2789 2789 2789 2789"
+    },
+    {
+      "input_code": 3,
+      "input_signed12": -2045,
+      "input_s16": -32720,
+      "mpc60_code": 3045,
+      "mpc60_signed12": -1051,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3045 3045 3045 3045 3045 3045 3045 3045"
+    },
+    {
+      "input_code": 4,
+      "input_signed12": -2044,
+      "input_s16": -32704,
+      "mpc60_code": 3045,
+      "mpc60_signed12": -1051,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3045 3045 3045 3045 3045 3045 3045 3045"
+    },
+    {
+      "input_code": 5,
+      "input_signed12": -2043,
+      "input_s16": -32688,
+      "mpc60_code": 3045,
+      "mpc60_signed12": -1051,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3045 3045 3045 3045 3045 3045 3045 3045"
+    },
+    {
+      "input_code": 6,
+      "input_signed12": -2042,
+      "input_s16": -32672,
+      "mpc60_code": 3045,
+      "mpc60_signed12": -1051,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3045 3045 3045 3045 3045 3045 3045 3045"
+    },
+    {
+      "input_code": 7,
+      "input_signed12": -2041,
+      "input_s16": -32656,
+      "mpc60_code": 3301,
+      "mpc60_signed12": -795,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3301 3301 3301 3301 3301 3301 3301 3301"
+    },
+    {
+      "input_code": 8,
+      "input_signed12": -2040,
+      "input_s16": -32640,
+      "mpc60_code": 3301,
+      "mpc60_signed12": -795,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3301 3301 3301 3301 3301 3301 3301 3301"
+    },
+    {
+      "input_code": 9,
+      "input_signed12": -2039,
+      "input_s16": -32624,
+      "mpc60_code": 3301,
+      "mpc60_signed12": -795,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3301 3301 3301 3301 3301 3301 3301 3301"
+    },
+    {
+      "input_code": 10,
+      "input_signed12": -2038,
+      "input_s16": -32608,
+      "mpc60_code": 3301,
+      "mpc60_signed12": -795,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3301 3301 3301 3301 3301 3301 3301 3301"
+    },
+    {
+      "input_code": 11,
+      "input_signed12": -2037,
+      "input_s16": -32592,
+      "mpc60_code": 3301,
+      "mpc60_signed12": -795,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3301 3301 3301 3301 3301 3301 3301 3301"
+    },
+    {
+      "input_code": 12,
+      "input_signed12": -2036,
+      "input_s16": -32576,
+      "mpc60_code": 3301,
+      "mpc60_signed12": -795,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3301 3301 3301 3301 3301 3301 3301 3301"
+    },
+    {
+      "input_code": 13,
+      "input_signed12": -2035,
+      "input_s16": -32560,
+      "mpc60_code": 3557,
+      "mpc60_signed12": -539,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3557 3557 3557 3557 3557 3557 3557 3557"
+    },
+    {
+      "input_code": 14,
+      "input_signed12": -2034,
+      "input_s16": -32544,
+      "mpc60_code": 3557,
+      "mpc60_signed12": -539,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3557 3557 3557 3557 3557 3557 3557 3557"
+    },
+    {
+      "input_code": 15,
+      "input_signed12": -2033,
+      "input_s16": -32528,
+      "mpc60_code": 3557,
+      "mpc60_signed12": -539,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3557 3557 3557 3557 3557 3557 3557 3557"
+    },
+    {
+      "input_code": 16,
+      "input_signed12": -2032,
+      "input_s16": -32512,
+      "mpc60_code": 3557,
+      "mpc60_signed12": -539,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3557 3557 3557 3557 3557 3557 3557 3557"
+    },
+    {
+      "input_code": 17,
+      "input_signed12": -2031,
+      "input_s16": -32496,
+      "mpc60_code": 3557,
+      "mpc60_signed12": -539,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3557 3557 3557 3557 3557 3557 3557 3557"
+    },
+    {
+      "input_code": 18,
+      "input_signed12": -2030,
+      "input_s16": -32480,
+      "mpc60_code": 3557,
+      "mpc60_signed12": -539,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3557 3557 3557 3557 3557 3557 3557 3557"
+    },
+    {
+      "input_code": 19,
+      "input_signed12": -2029,
+      "input_s16": -32464,
+      "mpc60_code": 3813,
+      "mpc60_signed12": -283,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3813 3813 3813 3813 3813 3813 3813 3813"
+    },
+    {
+      "input_code": 20,
+      "input_signed12": -2028,
+      "input_s16": -32448,
+      "mpc60_code": 3813,
+      "mpc60_signed12": -283,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3813 3813 3813 3813 3813 3813 3813 3813"
+    },
+    {
+      "input_code": 21,
+      "input_signed12": -2027,
+      "input_s16": -32432,
+      "mpc60_code": 3813,
+      "mpc60_signed12": -283,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3813 3813 3813 3813 3813 3813 3813 3813"
+    },
+    {
+      "input_code": 22,
+      "input_signed12": -2026,
+      "input_s16": -32416,
+      "mpc60_code": 3813,
+      "mpc60_signed12": -283,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3813 3813 3813 3813 3813 3813 3813 3813"
+    },
+    {
+      "input_code": 23,
+      "input_signed12": -2025,
+      "input_s16": -32400,
+      "mpc60_code": 4069,
+      "mpc60_signed12": -27,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "4069 4069 4069 4069 4069 4069 4069 4069"
+    },
+    {
+      "input_code": 24,
+      "input_signed12": -2024,
+      "input_s16": -32384,
+      "mpc60_code": 4069,
+      "mpc60_signed12": -27,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "4069 4069 4069 4069 4069 4069 4069 4069"
+    },
+    {
+      "input_code": 25,
+      "input_signed12": -2023,
+      "input_s16": -32368,
+      "mpc60_code": 4069,
+      "mpc60_signed12": -27,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "4069 4069 4069 4069 4069 4069 4069 4069"
+    },
+    {
+      "input_code": 26,
+      "input_signed12": -2022,
+      "input_s16": -32352,
+      "mpc60_code": 4069,
+      "mpc60_signed12": -27,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "4069 4069 4069 4069 4069 4069 4069 4069"
+    },
+    {
+      "input_code": 27,
+      "input_signed12": -2021,
+      "input_s16": -32336,
+      "mpc60_code": 4069,
+      "mpc60_signed12": -27,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "4069 4069 4069 4069 4069 4069 4069 4069"
+    },
+    {
+      "input_code": 28,
+      "input_signed12": -2020,
+      "input_s16": -32320,
+      "mpc60_code": 230,
+      "mpc60_signed12": 230,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "230 230 230 230 230 230 230 230"
+    },
+    {
+      "input_code": 29,
+      "input_signed12": -2019,
+      "input_s16": -32304,
+      "mpc60_code": 230,
+      "mpc60_signed12": 230,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "230 230 230 230 230 230 230 230"
+    },
+    {
+      "input_code": 30,
+      "input_signed12": -2018,
+      "input_s16": -32288,
+      "mpc60_code": 230,
+      "mpc60_signed12": 230,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "230 230 230 230 230 230 230 230"
+    },
+    {
+      "input_code": 31,
+      "input_signed12": -2017,
+      "input_s16": -32272,
+      "mpc60_code": 230,
+      "mpc60_signed12": 230,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "230 230 230 230 230 230 230 230"
+    },
+    {
+      "input_code": 32,
+      "input_signed12": -2016,
+      "input_s16": -32256,
+      "mpc60_code": 230,
+      "mpc60_signed12": 230,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "230 230 230 230 230 230 230 230"
+    },
+    {
+      "input_code": 33,
+      "input_signed12": -2015,
+      "input_s16": -32240,
+      "mpc60_code": 230,
+      "mpc60_signed12": 230,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "230 230 230 230 230 230 230 230"
+    },
+    {
+      "input_code": 34,
+      "input_signed12": -2014,
+      "input_s16": -32224,
+      "mpc60_code": 742,
+      "mpc60_signed12": 742,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "742 742 742 742 742 742 742 742"
+    },
+    {
+      "input_code": 35,
+      "input_signed12": -2013,
+      "input_s16": -32208,
+      "mpc60_code": 742,
+      "mpc60_signed12": 742,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "742 742 742 742 742 742 742 742"
+    },
+    {
+      "input_code": 36,
+      "input_signed12": -2012,
+      "input_s16": -32192,
+      "mpc60_code": 742,
+      "mpc60_signed12": 742,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "742 742 742 742 742 742 742 742"
+    },
+    {
+      "input_code": 37,
+      "input_signed12": -2011,
+      "input_s16": -32176,
+      "mpc60_code": 742,
+      "mpc60_signed12": 742,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "742 742 742 742 742 742 742 742"
+    },
+    {
+      "input_code": 38,
+      "input_signed12": -2010,
+      "input_s16": -32160,
+      "mpc60_code": 742,
+      "mpc60_signed12": 742,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "742 742 742 742 742 742 742 742"
+    },
+    {
+      "input_code": 39,
+      "input_signed12": -2009,
+      "input_s16": -32144,
+      "mpc60_code": 998,
+      "mpc60_signed12": 998,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "998 998 998 998 998 998 998 998"
+    },
+    {
+      "input_code": 40,
+      "input_signed12": -2008,
+      "input_s16": -32128,
+      "mpc60_code": 998,
+      "mpc60_signed12": 998,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "998 998 998 998 998 998 998 998"
+    },
+    {
+      "input_code": 41,
+      "input_signed12": -2007,
+      "input_s16": -32112,
+      "mpc60_code": 998,
+      "mpc60_signed12": 998,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "998 998 998 998 998 998 998 998"
+    },
+    {
+      "input_code": 42,
+      "input_signed12": -2006,
+      "input_s16": -32096,
+      "mpc60_code": 998,
+      "mpc60_signed12": 998,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "998 998 998 998 998 998 998 998"
+    },
+    {
+      "input_code": 43,
+      "input_signed12": -2005,
+      "input_s16": -32080,
+      "mpc60_code": 998,
+      "mpc60_signed12": 998,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "998 998 998 998 998 998 998 998"
+    },
+    {
+      "input_code": 44,
+      "input_signed12": -2004,
+      "input_s16": -32064,
+      "mpc60_code": 1254,
+      "mpc60_signed12": 1254,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1254 1254 1254 1254 1254 1254 1254 1254"
+    },
+    {
+      "input_code": 45,
+      "input_signed12": -2003,
+      "input_s16": -32048,
+      "mpc60_code": 1254,
+      "mpc60_signed12": 1254,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1254 1254 1254 1254 1254 1254 1254 1254"
+    },
+    {
+      "input_code": 46,
+      "input_signed12": -2002,
+      "input_s16": -32032,
+      "mpc60_code": 1254,
+      "mpc60_signed12": 1254,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1254 1254 1254 1254 1254 1254 1254 1254"
+    },
+    {
+      "input_code": 47,
+      "input_signed12": -2001,
+      "input_s16": -32016,
+      "mpc60_code": 1254,
+      "mpc60_signed12": 1254,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1254 1254 1254 1254 1254 1254 1254 1254"
+    },
+    {
+      "input_code": 48,
+      "input_signed12": -2000,
+      "input_s16": -32000,
+      "mpc60_code": 1254,
+      "mpc60_signed12": 1254,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1254 1254 1254 1254 1254 1254 1254 1254"
+    },
+    {
+      "input_code": 49,
+      "input_signed12": -1999,
+      "input_s16": -31984,
+      "mpc60_code": 1510,
+      "mpc60_signed12": 1510,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1510 1510 1510 1510 1510 1510 1510 1510"
+    },
+    {
+      "input_code": 50,
+      "input_signed12": -1998,
+      "input_s16": -31968,
+      "mpc60_code": 1510,
+      "mpc60_signed12": 1510,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1510 1510 1510 1510 1510 1510 1510 1510"
+    },
+    {
+      "input_code": 51,
+      "input_signed12": -1997,
+      "input_s16": -31952,
+      "mpc60_code": 1510,
+      "mpc60_signed12": 1510,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1510 1510 1510 1510 1510 1510 1510 1510"
+    },
+    {
+      "input_code": 52,
+      "input_signed12": -1996,
+      "input_s16": -31936,
+      "mpc60_code": 1510,
+      "mpc60_signed12": 1510,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1510 1510 1510 1510 1510 1510 1510 1510"
+    },
+    {
+      "input_code": 53,
+      "input_signed12": -1995,
+      "input_s16": -31920,
+      "mpc60_code": 1766,
+      "mpc60_signed12": 1766,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1766 1766 1766 1766 1766 1766 1766 1766"
+    },
+    {
+      "input_code": 54,
+      "input_signed12": -1994,
+      "input_s16": -31904,
+      "mpc60_code": 1766,
+      "mpc60_signed12": 1766,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1766 1766 1766 1766 1766 1766 1766 1766"
+    },
+    {
+      "input_code": 55,
+      "input_signed12": -1993,
+      "input_s16": -31888,
+      "mpc60_code": 1766,
+      "mpc60_signed12": 1766,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1766 1766 1766 1766 1766 1766 1766 1766"
+    },
+    {
+      "input_code": 56,
+      "input_signed12": -1992,
+      "input_s16": -31872,
+      "mpc60_code": 1766,
+      "mpc60_signed12": 1766,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1766 1766 1766 1766 1766 1766 1766 1766"
+    },
+    {
+      "input_code": 57,
+      "input_signed12": -1991,
+      "input_s16": -31856,
+      "mpc60_code": 1766,
+      "mpc60_signed12": 1766,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1766 1766 1766 1766 1766 1766 1766 1766"
+    },
+    {
+      "input_code": 58,
+      "input_signed12": -1990,
+      "input_s16": -31840,
+      "mpc60_code": 1766,
+      "mpc60_signed12": 1766,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1766 1766 1766 1766 1766 1766 1766 1766"
+    },
+    {
+      "input_code": 59,
+      "input_signed12": -1989,
+      "input_s16": -31824,
+      "mpc60_code": 2022,
+      "mpc60_signed12": 2022,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2022 2022 2022 2022 2022 2022 2022 2022"
+    },
+    {
+      "input_code": 60,
+      "input_signed12": -1988,
+      "input_s16": -31808,
+      "mpc60_code": 2022,
+      "mpc60_signed12": 2022,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2022 2022 2022 2022 2022 2022 2022 2022"
+    },
+    {
+      "input_code": 61,
+      "input_signed12": -1987,
+      "input_s16": -31792,
+      "mpc60_code": 2022,
+      "mpc60_signed12": 2022,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2022 2022 2022 2022 2022 2022 2022 2022"
+    },
+    {
+      "input_code": 62,
+      "input_signed12": -1986,
+      "input_s16": -31776,
+      "mpc60_code": 2022,
+      "mpc60_signed12": 2022,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2022 2022 2022 2022 2022 2022 2022 2022"
+    },
+    {
+      "input_code": 63,
+      "input_signed12": -1985,
+      "input_s16": -31760,
+      "mpc60_code": 2022,
+      "mpc60_signed12": 2022,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2022 2022 2022 2022 2022 2022 2022 2022"
+    }
+  ],
+  "around_zero": [
+    {
+      "input_code": 2032,
+      "input_signed12": -16,
+      "input_s16": -256,
+      "mpc60_code": 3583,
+      "mpc60_signed12": -513,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3583 3583 3583 3583 3583 3583 3583 3583"
+    },
+    {
+      "input_code": 2033,
+      "input_signed12": -15,
+      "input_s16": -240,
+      "mpc60_code": 3583,
+      "mpc60_signed12": -513,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3583 3583 3583 3583 3583 3583 3583 3583"
+    },
+    {
+      "input_code": 2034,
+      "input_signed12": -14,
+      "input_s16": -224,
+      "mpc60_code": 3583,
+      "mpc60_signed12": -513,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3583 3583 3583 3583 3583 3583 3583 3583"
+    },
+    {
+      "input_code": 2035,
+      "input_signed12": -13,
+      "input_s16": -208,
+      "mpc60_code": 3583,
+      "mpc60_signed12": -513,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3583 3583 3583 3583 3583 3583 3583 3583"
+    },
+    {
+      "input_code": 2036,
+      "input_signed12": -12,
+      "input_s16": -192,
+      "mpc60_code": 3583,
+      "mpc60_signed12": -513,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3583 3583 3583 3583 3583 3583 3583 3583"
+    },
+    {
+      "input_code": 2037,
+      "input_signed12": -11,
+      "input_s16": -176,
+      "mpc60_code": 3839,
+      "mpc60_signed12": -257,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3839 3839 3839 3839 3839 3839 3839 3839"
+    },
+    {
+      "input_code": 2038,
+      "input_signed12": -10,
+      "input_s16": -160,
+      "mpc60_code": 3839,
+      "mpc60_signed12": -257,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3839 3839 3839 3839 3839 3839 3839 3839"
+    },
+    {
+      "input_code": 2039,
+      "input_signed12": -9,
+      "input_s16": -144,
+      "mpc60_code": 3839,
+      "mpc60_signed12": -257,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3839 3839 3839 3839 3839 3839 3839 3839"
+    },
+    {
+      "input_code": 2040,
+      "input_signed12": -8,
+      "input_s16": -128,
+      "mpc60_code": 3839,
+      "mpc60_signed12": -257,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3839 3839 3839 3839 3839 3839 3839 3839"
+    },
+    {
+      "input_code": 2041,
+      "input_signed12": -7,
+      "input_s16": -112,
+      "mpc60_code": 3839,
+      "mpc60_signed12": -257,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3839 3839 3839 3839 3839 3839 3839 3839"
+    },
+    {
+      "input_code": 2042,
+      "input_signed12": -6,
+      "input_s16": -96,
+      "mpc60_code": 3839,
+      "mpc60_signed12": -257,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3839 3839 3839 3839 3839 3839 3839 3839"
+    },
+    {
+      "input_code": 2043,
+      "input_signed12": -5,
+      "input_s16": -80,
+      "mpc60_code": 4095,
+      "mpc60_signed12": -1,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "4095 4095 4095 4095 4095 4095 4095 4095"
+    },
+    {
+      "input_code": 2044,
+      "input_signed12": -4,
+      "input_s16": -64,
+      "mpc60_code": 4095,
+      "mpc60_signed12": -1,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "4095 4095 4095 4095 4095 4095 4095 4095"
+    },
+    {
+      "input_code": 2045,
+      "input_signed12": -3,
+      "input_s16": -48,
+      "mpc60_code": 4095,
+      "mpc60_signed12": -1,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "4095 4095 4095 4095 4095 4095 4095 4095"
+    },
+    {
+      "input_code": 2046,
+      "input_signed12": -2,
+      "input_s16": -32,
+      "mpc60_code": 4095,
+      "mpc60_signed12": -1,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "4095 4095 4095 4095 4095 4095 4095 4095"
+    },
+    {
+      "input_code": 2047,
+      "input_signed12": -1,
+      "input_s16": -16,
+      "mpc60_code": 0,
+      "mpc60_signed12": 0,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "0 0 0 0 0 0 0 0"
+    },
+    {
+      "input_code": 2048,
+      "input_signed12": 0,
+      "input_s16": 0,
+      "mpc60_code": 0,
+      "mpc60_signed12": 0,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "0 0 0 0 0 0 0 0"
+    },
+    {
+      "input_code": 2049,
+      "input_signed12": 1,
+      "input_s16": 16,
+      "mpc60_code": 0,
+      "mpc60_signed12": 0,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "0 0 0 0 0 0 0 0"
+    },
+    {
+      "input_code": 2050,
+      "input_signed12": 2,
+      "input_s16": 32,
+      "mpc60_code": 0,
+      "mpc60_signed12": 0,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "0 0 0 0 0 0 0 0"
+    },
+    {
+      "input_code": 2051,
+      "input_signed12": 3,
+      "input_s16": 48,
+      "mpc60_code": 0,
+      "mpc60_signed12": 0,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "0 0 0 0 0 0 0 0"
+    },
+    {
+      "input_code": 2052,
+      "input_signed12": 4,
+      "input_s16": 64,
+      "mpc60_code": 0,
+      "mpc60_signed12": 0,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "0 0 0 0 0 0 0 0"
+    },
+    {
+      "input_code": 2053,
+      "input_signed12": 5,
+      "input_s16": 80,
+      "mpc60_code": 256,
+      "mpc60_signed12": 256,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "256 256 256 256 256 256 256 256"
+    },
+    {
+      "input_code": 2054,
+      "input_signed12": 6,
+      "input_s16": 96,
+      "mpc60_code": 256,
+      "mpc60_signed12": 256,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "256 256 256 256 256 256 256 256"
+    },
+    {
+      "input_code": 2055,
+      "input_signed12": 7,
+      "input_s16": 112,
+      "mpc60_code": 256,
+      "mpc60_signed12": 256,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "256 256 256 256 256 256 256 256"
+    },
+    {
+      "input_code": 2056,
+      "input_signed12": 8,
+      "input_s16": 128,
+      "mpc60_code": 256,
+      "mpc60_signed12": 256,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "256 256 256 256 256 256 256 256"
+    },
+    {
+      "input_code": 2057,
+      "input_signed12": 9,
+      "input_s16": 144,
+      "mpc60_code": 512,
+      "mpc60_signed12": 512,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "512 512 512 512 512 512 512 512"
+    },
+    {
+      "input_code": 2058,
+      "input_signed12": 10,
+      "input_s16": 160,
+      "mpc60_code": 512,
+      "mpc60_signed12": 512,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "512 512 512 512 512 512 512 512"
+    },
+    {
+      "input_code": 2059,
+      "input_signed12": 11,
+      "input_s16": 176,
+      "mpc60_code": 512,
+      "mpc60_signed12": 512,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "512 512 512 512 512 512 512 512"
+    },
+    {
+      "input_code": 2060,
+      "input_signed12": 12,
+      "input_s16": 192,
+      "mpc60_code": 512,
+      "mpc60_signed12": 512,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "512 512 512 512 512 512 512 512"
+    },
+    {
+      "input_code": 2061,
+      "input_signed12": 13,
+      "input_s16": 208,
+      "mpc60_code": 512,
+      "mpc60_signed12": 512,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "512 512 512 512 512 512 512 512"
+    },
+    {
+      "input_code": 2062,
+      "input_signed12": 14,
+      "input_s16": 224,
+      "mpc60_code": 768,
+      "mpc60_signed12": 768,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "768 768 768 768 768 768 768 768"
+    },
+    {
+      "input_code": 2063,
+      "input_signed12": 15,
+      "input_s16": 240,
+      "mpc60_code": 768,
+      "mpc60_signed12": 768,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "768 768 768 768 768 768 768 768"
+    },
+    {
+      "input_code": 2064,
+      "input_signed12": 16,
+      "input_s16": 256,
+      "mpc60_code": 768,
+      "mpc60_signed12": 768,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "768 768 768 768 768 768 768 768"
+    }
+  ],
+  "last_64": [
+    {
+      "input_code": 4032,
+      "input_signed12": 1984,
+      "input_s16": 31744,
+      "mpc60_code": 2073,
+      "mpc60_signed12": -2023,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2073 2073 2073 2073 2073 2073 2073 2073"
+    },
+    {
+      "input_code": 4033,
+      "input_signed12": 1985,
+      "input_s16": 31760,
+      "mpc60_code": 2073,
+      "mpc60_signed12": -2023,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2073 2073 2073 2073 2073 2073 2073 2073"
+    },
+    {
+      "input_code": 4034,
+      "input_signed12": 1986,
+      "input_s16": 31776,
+      "mpc60_code": 2073,
+      "mpc60_signed12": -2023,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2073 2073 2073 2073 2073 2073 2073 2073"
+    },
+    {
+      "input_code": 4035,
+      "input_signed12": 1987,
+      "input_s16": 31792,
+      "mpc60_code": 2073,
+      "mpc60_signed12": -2023,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2073 2073 2073 2073 2073 2073 2073 2073"
+    },
+    {
+      "input_code": 4036,
+      "input_signed12": 1988,
+      "input_s16": 31808,
+      "mpc60_code": 2329,
+      "mpc60_signed12": -1767,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2329 2329 2329 2329 2329 2329 2329 2329"
+    },
+    {
+      "input_code": 4037,
+      "input_signed12": 1989,
+      "input_s16": 31824,
+      "mpc60_code": 2329,
+      "mpc60_signed12": -1767,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2329 2329 2329 2329 2329 2329 2329 2329"
+    },
+    {
+      "input_code": 4038,
+      "input_signed12": 1990,
+      "input_s16": 31840,
+      "mpc60_code": 2329,
+      "mpc60_signed12": -1767,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2329 2329 2329 2329 2329 2329 2329 2329"
+    },
+    {
+      "input_code": 4039,
+      "input_signed12": 1991,
+      "input_s16": 31856,
+      "mpc60_code": 2329,
+      "mpc60_signed12": -1767,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2329 2329 2329 2329 2329 2329 2329 2329"
+    },
+    {
+      "input_code": 4040,
+      "input_signed12": 1992,
+      "input_s16": 31872,
+      "mpc60_code": 2585,
+      "mpc60_signed12": -1511,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2585 2585 2585 2585 2585 2585 2585 2585"
+    },
+    {
+      "input_code": 4041,
+      "input_signed12": 1993,
+      "input_s16": 31888,
+      "mpc60_code": 2585,
+      "mpc60_signed12": -1511,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2585 2585 2585 2585 2585 2585 2585 2585"
+    },
+    {
+      "input_code": 4042,
+      "input_signed12": 1994,
+      "input_s16": 31904,
+      "mpc60_code": 2585,
+      "mpc60_signed12": -1511,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2585 2585 2585 2585 2585 2585 2585 2585"
+    },
+    {
+      "input_code": 4043,
+      "input_signed12": 1995,
+      "input_s16": 31920,
+      "mpc60_code": 2585,
+      "mpc60_signed12": -1511,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2585 2585 2585 2585 2585 2585 2585 2585"
+    },
+    {
+      "input_code": 4044,
+      "input_signed12": 1996,
+      "input_s16": 31936,
+      "mpc60_code": 2585,
+      "mpc60_signed12": -1511,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2585 2585 2585 2585 2585 2585 2585 2585"
+    },
+    {
+      "input_code": 4045,
+      "input_signed12": 1997,
+      "input_s16": 31952,
+      "mpc60_code": 2841,
+      "mpc60_signed12": -1255,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2841 2841 2841 2841 2841 2841 2841 2841"
+    },
+    {
+      "input_code": 4046,
+      "input_signed12": 1998,
+      "input_s16": 31968,
+      "mpc60_code": 2841,
+      "mpc60_signed12": -1255,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2841 2841 2841 2841 2841 2841 2841 2841"
+    },
+    {
+      "input_code": 4047,
+      "input_signed12": 1999,
+      "input_s16": 31984,
+      "mpc60_code": 2841,
+      "mpc60_signed12": -1255,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2841 2841 2841 2841 2841 2841 2841 2841"
+    },
+    {
+      "input_code": 4048,
+      "input_signed12": 2000,
+      "input_s16": 32000,
+      "mpc60_code": 2841,
+      "mpc60_signed12": -1255,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2841 2841 2841 2841 2841 2841 2841 2841"
+    },
+    {
+      "input_code": 4049,
+      "input_signed12": 2001,
+      "input_s16": 32016,
+      "mpc60_code": 2841,
+      "mpc60_signed12": -1255,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2841 2841 2841 2841 2841 2841 2841 2841"
+    },
+    {
+      "input_code": 4050,
+      "input_signed12": 2002,
+      "input_s16": 32032,
+      "mpc60_code": 2841,
+      "mpc60_signed12": -1255,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "2841 2841 2841 2841 2841 2841 2841 2841"
+    },
+    {
+      "input_code": 4051,
+      "input_signed12": 2003,
+      "input_s16": 32048,
+      "mpc60_code": 3097,
+      "mpc60_signed12": -999,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3097 3097 3097 3097 3097 3097 3097 3097"
+    },
+    {
+      "input_code": 4052,
+      "input_signed12": 2004,
+      "input_s16": 32064,
+      "mpc60_code": 3097,
+      "mpc60_signed12": -999,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3097 3097 3097 3097 3097 3097 3097 3097"
+    },
+    {
+      "input_code": 4053,
+      "input_signed12": 2005,
+      "input_s16": 32080,
+      "mpc60_code": 3097,
+      "mpc60_signed12": -999,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3097 3097 3097 3097 3097 3097 3097 3097"
+    },
+    {
+      "input_code": 4054,
+      "input_signed12": 2006,
+      "input_s16": 32096,
+      "mpc60_code": 3097,
+      "mpc60_signed12": -999,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3097 3097 3097 3097 3097 3097 3097 3097"
+    },
+    {
+      "input_code": 4055,
+      "input_signed12": 2007,
+      "input_s16": 32112,
+      "mpc60_code": 3353,
+      "mpc60_signed12": -743,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3353 3353 3353 3353 3353 3353 3353 3353"
+    },
+    {
+      "input_code": 4056,
+      "input_signed12": 2008,
+      "input_s16": 32128,
+      "mpc60_code": 3353,
+      "mpc60_signed12": -743,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3353 3353 3353 3353 3353 3353 3353 3353"
+    },
+    {
+      "input_code": 4057,
+      "input_signed12": 2009,
+      "input_s16": 32144,
+      "mpc60_code": 3353,
+      "mpc60_signed12": -743,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3353 3353 3353 3353 3353 3353 3353 3353"
+    },
+    {
+      "input_code": 4058,
+      "input_signed12": 2010,
+      "input_s16": 32160,
+      "mpc60_code": 3353,
+      "mpc60_signed12": -743,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3353 3353 3353 3353 3353 3353 3353 3353"
+    },
+    {
+      "input_code": 4059,
+      "input_signed12": 2011,
+      "input_s16": 32176,
+      "mpc60_code": 3353,
+      "mpc60_signed12": -743,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3353 3353 3353 3353 3353 3353 3353 3353"
+    },
+    {
+      "input_code": 4060,
+      "input_signed12": 2012,
+      "input_s16": 32192,
+      "mpc60_code": 3353,
+      "mpc60_signed12": -743,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3353 3353 3353 3353 3353 3353 3353 3353"
+    },
+    {
+      "input_code": 4061,
+      "input_signed12": 2013,
+      "input_s16": 32208,
+      "mpc60_code": 3609,
+      "mpc60_signed12": -487,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3609 3609 3609 3609 3609 3609 3609 3609"
+    },
+    {
+      "input_code": 4062,
+      "input_signed12": 2014,
+      "input_s16": 32224,
+      "mpc60_code": 3609,
+      "mpc60_signed12": -487,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3609 3609 3609 3609 3609 3609 3609 3609"
+    },
+    {
+      "input_code": 4063,
+      "input_signed12": 2015,
+      "input_s16": 32240,
+      "mpc60_code": 3609,
+      "mpc60_signed12": -487,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3609 3609 3609 3609 3609 3609 3609 3609"
+    },
+    {
+      "input_code": 4064,
+      "input_signed12": 2016,
+      "input_s16": 32256,
+      "mpc60_code": 3609,
+      "mpc60_signed12": -487,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3609 3609 3609 3609 3609 3609 3609 3609"
+    },
+    {
+      "input_code": 4065,
+      "input_signed12": 2017,
+      "input_s16": 32272,
+      "mpc60_code": 3609,
+      "mpc60_signed12": -487,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "3609 3609 3609 3609 3609 3609 3609 3609"
+    },
+    {
+      "input_code": 4066,
+      "input_signed12": 2018,
+      "input_s16": 32288,
+      "mpc60_code": 26,
+      "mpc60_signed12": 26,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "26 26 26 26 26 26 26 26"
+    },
+    {
+      "input_code": 4067,
+      "input_signed12": 2019,
+      "input_s16": 32304,
+      "mpc60_code": 26,
+      "mpc60_signed12": 26,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "26 26 26 26 26 26 26 26"
+    },
+    {
+      "input_code": 4068,
+      "input_signed12": 2020,
+      "input_s16": 32320,
+      "mpc60_code": 26,
+      "mpc60_signed12": 26,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "26 26 26 26 26 26 26 26"
+    },
+    {
+      "input_code": 4069,
+      "input_signed12": 2021,
+      "input_s16": 32336,
+      "mpc60_code": 26,
+      "mpc60_signed12": 26,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "26 26 26 26 26 26 26 26"
+    },
+    {
+      "input_code": 4070,
+      "input_signed12": 2022,
+      "input_s16": 32352,
+      "mpc60_code": 282,
+      "mpc60_signed12": 282,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "282 282 282 282 282 282 282 282"
+    },
+    {
+      "input_code": 4071,
+      "input_signed12": 2023,
+      "input_s16": 32368,
+      "mpc60_code": 282,
+      "mpc60_signed12": 282,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "282 282 282 282 282 282 282 282"
+    },
+    {
+      "input_code": 4072,
+      "input_signed12": 2024,
+      "input_s16": 32384,
+      "mpc60_code": 282,
+      "mpc60_signed12": 282,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "282 282 282 282 282 282 282 282"
+    },
+    {
+      "input_code": 4073,
+      "input_signed12": 2025,
+      "input_s16": 32400,
+      "mpc60_code": 282,
+      "mpc60_signed12": 282,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "282 282 282 282 282 282 282 282"
+    },
+    {
+      "input_code": 4074,
+      "input_signed12": 2026,
+      "input_s16": 32416,
+      "mpc60_code": 282,
+      "mpc60_signed12": 282,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "282 282 282 282 282 282 282 282"
+    },
+    {
+      "input_code": 4075,
+      "input_signed12": 2027,
+      "input_s16": 32432,
+      "mpc60_code": 282,
+      "mpc60_signed12": 282,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "282 282 282 282 282 282 282 282"
+    },
+    {
+      "input_code": 4076,
+      "input_signed12": 2028,
+      "input_s16": 32448,
+      "mpc60_code": 538,
+      "mpc60_signed12": 538,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "538 538 538 538 538 538 538 538"
+    },
+    {
+      "input_code": 4077,
+      "input_signed12": 2029,
+      "input_s16": 32464,
+      "mpc60_code": 538,
+      "mpc60_signed12": 538,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "538 538 538 538 538 538 538 538"
+    },
+    {
+      "input_code": 4078,
+      "input_signed12": 2030,
+      "input_s16": 32480,
+      "mpc60_code": 538,
+      "mpc60_signed12": 538,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "538 538 538 538 538 538 538 538"
+    },
+    {
+      "input_code": 4079,
+      "input_signed12": 2031,
+      "input_s16": 32496,
+      "mpc60_code": 538,
+      "mpc60_signed12": 538,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "538 538 538 538 538 538 538 538"
+    },
+    {
+      "input_code": 4080,
+      "input_signed12": 2032,
+      "input_s16": 32512,
+      "mpc60_code": 538,
+      "mpc60_signed12": 538,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "538 538 538 538 538 538 538 538"
+    },
+    {
+      "input_code": 4081,
+      "input_signed12": 2033,
+      "input_s16": 32528,
+      "mpc60_code": 538,
+      "mpc60_signed12": 538,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "538 538 538 538 538 538 538 538"
+    },
+    {
+      "input_code": 4082,
+      "input_signed12": 2034,
+      "input_s16": 32544,
+      "mpc60_code": 794,
+      "mpc60_signed12": 794,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "794 794 794 794 794 794 794 794"
+    },
+    {
+      "input_code": 4083,
+      "input_signed12": 2035,
+      "input_s16": 32560,
+      "mpc60_code": 794,
+      "mpc60_signed12": 794,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "794 794 794 794 794 794 794 794"
+    },
+    {
+      "input_code": 4084,
+      "input_signed12": 2036,
+      "input_s16": 32576,
+      "mpc60_code": 794,
+      "mpc60_signed12": 794,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "794 794 794 794 794 794 794 794"
+    },
+    {
+      "input_code": 4085,
+      "input_signed12": 2037,
+      "input_s16": 32592,
+      "mpc60_code": 794,
+      "mpc60_signed12": 794,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "794 794 794 794 794 794 794 794"
+    },
+    {
+      "input_code": 4086,
+      "input_signed12": 2038,
+      "input_s16": 32608,
+      "mpc60_code": 794,
+      "mpc60_signed12": 794,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "794 794 794 794 794 794 794 794"
+    },
+    {
+      "input_code": 4087,
+      "input_signed12": 2039,
+      "input_s16": 32624,
+      "mpc60_code": 1050,
+      "mpc60_signed12": 1050,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1050 1050 1050 1050 1050 1050 1050 1050"
+    },
+    {
+      "input_code": 4088,
+      "input_signed12": 2040,
+      "input_s16": 32640,
+      "mpc60_code": 1050,
+      "mpc60_signed12": 1050,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1050 1050 1050 1050 1050 1050 1050 1050"
+    },
+    {
+      "input_code": 4089,
+      "input_signed12": 2041,
+      "input_s16": 32656,
+      "mpc60_code": 1050,
+      "mpc60_signed12": 1050,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1050 1050 1050 1050 1050 1050 1050 1050"
+    },
+    {
+      "input_code": 4090,
+      "input_signed12": 2042,
+      "input_s16": 32672,
+      "mpc60_code": 1050,
+      "mpc60_signed12": 1050,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1050 1050 1050 1050 1050 1050 1050 1050"
+    },
+    {
+      "input_code": 4091,
+      "input_signed12": 2043,
+      "input_s16": 32688,
+      "mpc60_code": 1306,
+      "mpc60_signed12": 1306,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1306 1306 1306 1306 1306 1306 1306 1306"
+    },
+    {
+      "input_code": 4092,
+      "input_signed12": 2044,
+      "input_s16": 32704,
+      "mpc60_code": 1306,
+      "mpc60_signed12": 1306,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1306 1306 1306 1306 1306 1306 1306 1306"
+    },
+    {
+      "input_code": 4093,
+      "input_signed12": 2045,
+      "input_s16": 32720,
+      "mpc60_code": 1306,
+      "mpc60_signed12": 1306,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1306 1306 1306 1306 1306 1306 1306 1306"
+    },
+    {
+      "input_code": 4094,
+      "input_signed12": 2046,
+      "input_s16": 32736,
+      "mpc60_code": 1306,
+      "mpc60_signed12": 1306,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1306 1306 1306 1306 1306 1306 1306 1306"
+    },
+    {
+      "input_code": 4095,
+      "input_signed12": 2047,
+      "input_s16": 32752,
+      "mpc60_code": 1306,
+      "mpc60_signed12": 1306,
+      "interior_unique_count": 1,
+      "interior_majority_count": 8,
+      "interior_codes": "1306 1306 1306 1306 1306 1306 1306 1306"
+    }
+  ]
+}

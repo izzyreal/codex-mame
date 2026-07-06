@@ -1,0 +1,13 @@
+{
+  "source": "/tmp/SOUND017_MPC3000.SND",
+  "source_size": 176438,
+  "source_sha1": "09af75f69ac3c6909f9dd3f6b4d2921b5877bc2d",
+  "header_size": 38,
+  "sample_count_u4le_at_0x1a": 88200,
+  "sample_count_u4le_at_0x1e": 88200,
+  "payload_size": 176400,
+  "wav_probe": "/tmp/SOUND017_MPC3000_offset38_s16le_44100.wav",
+  "wav_probe_sha1": "ab77c2a32c844f6d371329c3d58a4034c52fc1fb",
+  "interpretation": "mono signed 16-bit little-endian PCM at 44100 Hz, payload starts at byte 38",
+  "first_128_hex": "01 02 73 6f 75 6e 64 30 31 37 20 20 20 20 20 20 20 20 00 64 00 00 00 00 00 00 88 58 01 00 88 58 01 00 90 36 1b 00 0b 00 0e 00 09 00 01 00 0e 00 09 00 0d 00 06 00 00 00 0d 00 0b 00 0c 00 08 00 fe ff 03 00 0c 00 0b 00 0c 00 0a 00 0b 00 0b 00 0c 00 0e 00 0d 00 0d 00 07 00 03 00 0e 00 0a 00 0e 00 0c 00 0c 00 0c 00 0e 00 09 00 ff ff 07 00 09 00 05 00 11 00 09 00 02 00 0f 00 0c 00 0f 00"
+}

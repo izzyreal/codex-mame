@@ -1,0 +1,49 @@
+{
+  "snd": "/tmp/mpc60-16-to-12-stimuli2-20260706/STIM002_MPC3000.SND",
+  "snd_size": 134742,
+  "snd_sha1": "36e29b196041582e8af8ce585d6bed55cb7308b1",
+  "wav_probe": "/tmp/mpc60-16-to-12-stimuli2-20260706/STIM002_source_s16le_44100.wav",
+  "wav_probe_sha1": "fd4557d31d5b17de54209992adf276b97bfc820e",
+  "format": "provisional MPC3000 SND v2, mono signed 16-bit little-endian payload",
+  "header_size": 38,
+  "frame_count": 67352,
+  "payload_size": 134704,
+  "segments": [
+    {
+      "name": "zero_guard_start",
+      "start_index": 0,
+      "end_index_exclusive": 64,
+      "sample_count": 64,
+      "description": "Initial zero plateau for alignment and settle."
+    },
+    {
+      "name": "all_12bit_left_justified_plateaus",
+      "start_index": 64,
+      "end_index_exclusive": 65600,
+      "sample_count": 65536,
+      "description": "All signed 12-bit values left-justified into 16-bit PCM, each repeated 16 times. Input code for plateau p is p-2048; sample value is (p-2048)<<4."
+    },
+    {
+      "name": "rounding_probe",
+      "start_index": 65600,
+      "end_index_exclusive": 67032,
+      "sample_count": 1432,
+      "description": "Short plateaus around selected low-nibble/rounding boundaries."
+    },
+    {
+      "name": "alternating_extremes",
+      "start_index": 67032,
+      "end_index_exclusive": 67288,
+      "sample_count": 256,
+      "description": "Alternating extremes for pair packing/order."
+    },
+    {
+      "name": "zero_guard_end",
+      "start_index": 67288,
+      "end_index_exclusive": 67352,
+      "sample_count": 64,
+      "description": "Trailing zero plateau for end alignment."
+    }
+  ],
+  "expected_mpc60_resave_size": 101067
+}

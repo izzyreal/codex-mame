@@ -1,0 +1,29 @@
+{
+  "image": "/tmp/mpc60_16_to_12_path_20260706.img",
+  "image_size": 819200,
+  "image_sha1": "ca38fa5e839e463d3daddfbb83bfa1d5e9e0486e",
+  "geometry": {
+    "bytes_per_sector": 512,
+    "sectors_per_cluster": 2,
+    "reserved_sectors": 1,
+    "fat_count": 2,
+    "root_entries": 112,
+    "sectors_per_fat": 3
+  },
+  "files": [
+    {
+      "name": "SOUND017.SND",
+      "size": 176438,
+      "sha1": "09af75f69ac3c6909f9dd3f6b4d2921b5877bc2d",
+      "clusters": 173,
+      "first_64_hex": "01 02 73 6f 75 6e 64 30 31 37 20 20 20 20 20 20 20 20 00 64 00 00 00 00 00 00 88 58 01 00 88 58 01 00 90 36 1b 00 0b 00 0e 00 09 00 01 00 0e 00 09 00 0d 00 06 00 00 00 0d 00 0b 00 0c 00 08 00"
+    },
+    {
+      "name": "JAUND017.SND",
+      "size": 132339,
+      "sha1": "e13112ae315127e8fb3490441da342e3771ce396",
+      "clusters": 130,
+      "first_64_hex": "01 01 4a 41 55 4e 44 30 31 37 20 20 20 20 20 20 20 20 00 88 58 01 00 00 00 9d 08 00 00 14 00 64 11 00 00 00 00 00 64 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ff 0c 00 00"
+    }
+  ]
+}
