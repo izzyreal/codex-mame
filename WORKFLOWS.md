@@ -84,6 +84,153 @@ The first concrete targets on the current mounted volume are:
 - `/Volumes/MPC2000XL/REVENG/mpc60/ROCK.SET`
 - `/Volumes/MPC2000XL/REVENG/mpc60/STUDIO.SET`
 
+## MPC3000 Basics
+
+Confirmed differences from the MPC2000XL workflow:
+
+- there is a direct `Disk` button; do not assume `Shift + 3`
+- the UI exposes four soft keys in MAME as `Soft Key 1` through `Soft Key 4`
+- the unnamed physical Enter key appears in the MAME input dump as `Keyboard`
+- the data entry control is exposed as an analog field named `Dial`
+- `mpcprobe.dial(n)` now works for `mpc3000` by stepping that analog `Dial`
+  field with absolute-value updates; prefer this over ad hoc `queue_set("Dial", ...)`
+
+## MPC3000 Save SEQ Authoring
+
+Minimal confirmed path to author a real note-bearing `.SEQ` fixture in MAME:
+
+1. Boot `mpc3000` with a writable floppy image attached.
+2. Wait for `Searching for storage devices...` and press `Soft Key 4` for
+   `<Cancel>` to skip the long SCSI scan.
+3. From the main screen, open `Step Edit`.
+4. Press `Soft Key 1` for `<Insert>`.
+5. This opens an inline note-event template at the current tick.
+6. Press `Soft Key 1` again to commit the inserted event.
+7. Press `Disk`.
+8. Press `1` for `Save a sequence`.
+9. On the `Save a Sequence` screen, press `Soft Key 1` for `<Do it>`.
+10. If `File exists. Replace?` appears, press `Soft Key 3` for `<Yes>`.
+
+Confirmed result:
+
+- MAME wrote a valid `SEQ01.SEQ` to the floppy image
+- copied regression fixture:
+  `/Users/izmar/git/vmpc-juce/editables/mpc/test-resources/RealMpc3000/Seq/M3KNOTE.SEQ`
+- overwrite-confirmed save artifact from July 9, 2026:
+  `/tmp/M3KSAVE1.SEQ`
+
+## MPC3000 Step Edit Caution
+
+Do not assume `Soft Key 1` means "commit" just because the label says
+`<Insert>` and a note appears afterward.
+
+Observed failure mode during probing:
+
+- after editing an inline insert row, pressing `Soft Key 1` can leave the UI in
+  a state with the inserted note plus a fresh default insert row above it
+- if that state is misread as a fully finished single-note commit, later save
+  tests can accidentally persist the wrong duplicate/default note
+- on deduping note data, that can hide the intended edited note entirely
+
+Practical rule:
+
+- after any assumed insert/finish action, stop and inspect the LCD before
+  continuing
+- verify the exact number of visible events and which row is active
+- do not infer semantics like "commit" from a partial visual change
+
+## RE Meta Rule
+
+Do not invent hidden conceptual states that the machine has not demonstrated.
+
+Bad pattern:
+
+- importing a concept from other software, such as "commit", even though the
+  visible UI says something more literal like `Insert`
+
+Better pattern:
+
+- start from the literal on-screen wording and observed behavior
+- if a button says `Insert`, the default assumption is that pressing it inserts
+  again until direct observation disproves that
+- hypotheses that add invisible semantics need tighter verification than
+  ordinary UI observations
+
+## LCD Stop Conditions
+
+Use the LCD as a hard gate after every action in exploratory probing.
+
+Rules:
+
+- if the observed screen state already contradicts the goal, abort that branch
+  immediately
+- do not continue with "maybe the next action will neutralize it" reasoning
+- separate observed fact from speculative follow-up
+
+Concrete MPC3000 example:
+
+- goal: exactly one inserted note event
+- if the LCD shows two events, stop
+- do not continue to `Down Arrow`, save flow, or any other cleanup idea on that
+  branch
+
+## Literal Controls
+
+Once the literal meaning of a control is clear, treat it as fixed unless direct
+observation disproves it.
+
+Concrete MPC3000 example:
+
+- `Soft Key 1` labeled `Insert` inserts
+- if the goal is not to insert another event, `Soft Key 1` is off-limits
+- do not reuse a known insert action as a speculative "finish", "commit", or
+  "accept" action
+
+## MPC MAME Operating Rules
+
+Use these as the default posture for any screen-navigation or behavior-mapping
+task.
+
+1. Stay literal.
+   Start from the visible label, visible cursor, and visible value. Do not add
+   hidden semantics unless the machine clearly demonstrates them.
+
+2. One action, one observation.
+   In exploratory work, take one input step, then read the LCD before deciding
+   the next step.
+
+3. The LCD is authoritative.
+   If the screen already contradicts the goal, stop that branch immediately
+   instead of hoping a later action will "fix" it.
+
+4. Prefer the narrowest probe.
+   Change one thing at a time: one button, one arrow, one dial move, one soft
+   key. Avoid multi-step scripts until the single-step behavior is understood.
+
+5. Separate navigation from editing.
+   First learn how to arrive at a state. Then, in a separate probe, learn what
+   each control does inside that state.
+
+6. Distinguish observed fact from hypothesis.
+   Write down what the LCD actually showed, separately from what you think it
+   means.
+
+7. Treat labels as contracts until disproved.
+   If a control says `Insert`, assume it inserts. If it says `Cancel`, assume
+   it cancels. Only revise that reading after direct contradictory evidence.
+
+8. Use disposable media for save experiments.
+   For file-writing probes, start from a clean throwaway image so overwrite
+   behavior and old artifacts do not blur the result.
+
+9. Verify the product, not just the path.
+   After a save or load flow, inspect the resulting file bytes or resulting LCD
+   state directly. A plausible UI path is not enough.
+
+10. Keep process state clean.
+   Ensure exactly one emulator instance is running before and after each probe.
+   Do not trust observations if more than one instance exists.
+
 ## Background PNG Generation
 
 For `editables/mpc`, screen-specific background PNGs live in:

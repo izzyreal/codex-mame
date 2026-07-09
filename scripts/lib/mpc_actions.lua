@@ -23,6 +23,26 @@ local function resolve_field(field_name)
     return port_tag, field
 end
 
+local function press_value(field)
+    local mask = tonumber(field.mask)
+    if mask and mask ~= 0 then
+        return mask
+    end
+    local def_value = tonumber(field.defvalue)
+    if def_value and def_value ~= 0 then
+        return def_value
+    end
+    return 1
+end
+
+local function release_field(field)
+    if field.is_analog then
+        field:clear_value()
+        return
+    end
+    field:set_value(0)
+end
+
 function actions.wait_frames(frame_count)
     for _ = 1, frame_count do
         emu.wait_next_frame()
@@ -33,9 +53,9 @@ function actions.tap(field_name, hold_frames, settle_frames)
     hold_frames = hold_frames or 2
     settle_frames = settle_frames or 2
     local _, field = resolve_field(field_name)
-    field:set_value(1)
+    field:set_value(press_value(field))
     actions.wait_frames(hold_frames)
-    field:clear_value()
+    release_field(field)
     actions.wait_frames(settle_frames)
 end
 
@@ -154,9 +174,9 @@ function actions.turn_dial(delta, settle_frames)
     local field_name = delta < 0 and "Data Wheel -1" or "Data Wheel +1"
     local _, field = resolve_field(field_name)
     for _ = 1, math.abs(delta) do
-        field:set_value(1)
+        field:set_value(press_value(field))
         actions.wait_frames(1)
-        field:clear_value()
+        release_field(field)
         actions.wait_frames(settle_frames)
     end
 end

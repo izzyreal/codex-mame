@@ -1,6 +1,7 @@
 # codex-mame
 
-Minimal MAME automation workspace for probing `mpc2000xl`.
+Minimal MAME automation workspace for probing Akai MPC machines, currently
+centered on `mpc2000xl` and `mpc3000`.
 
 ## Start Here
 
@@ -112,7 +113,7 @@ predicting cursor movement without trial-and-error on the LCD.
 
 ## Run
 
-For normal interactive work, use the wrapper script:
+For normal interactive `mpc2000xl` work, use the wrapper script:
 
 ```sh
 /Users/izmar/git/codex-mame/run_mpc2000xl.sh
@@ -153,6 +154,63 @@ Equivalent raw command:
 ```
 
 This assumes your hacked MAME tree already has the required `mpc2000xl` ROMs.
+
+For normal interactive `mpc3000` work, use the wrapper script:
+
+```sh
+/Users/izmar/git/codex-mame/run_mpc3000.sh
+```
+
+This starts `mpc3000` in a window using the hacked MAME binary in
+`/Users/izmar/git/mame`, with the Lua console enabled. If
+`/tmp/mpc3000_work.img` exists, it is attached automatically as `-flop`.
+
+To stop a running `mpc3000` session, use:
+
+```sh
+/Users/izmar/git/codex-mame/stop_mpc3000.sh
+```
+
+To count currently running `mpc3000` instances, use:
+
+```sh
+/Users/izmar/git/codex-mame/count_mpc3000.sh
+```
+
+Use these helpers rather than ad hoc raw launches. The probing workflow depends
+on there being exactly one live `mpc3000` instance at a time.
+
+Equivalent raw command without a floppy image:
+
+```sh
+/Users/izmar/git/mame/mame \
+  -window \
+  -console \
+  -snapview native \
+  -skip_gameinfo \
+  -plugin mpcprobe \
+  -pluginspath '/Users/izmar/git/codex-mame/plugins;/Users/izmar/git/mame/plugins' \
+  mpc3000
+```
+
+Equivalent raw command with the default writable floppy image:
+
+```sh
+/Users/izmar/git/mame/mame \
+  -window \
+  -console \
+  -snapview native \
+  -skip_gameinfo \
+  -plugin mpcprobe \
+  -pluginspath '/Users/izmar/git/codex-mame/plugins;/Users/izmar/git/mame/plugins' \
+  mpc3000 \
+  -flop /tmp/mpc3000_work.img
+```
+
+The `mpcprobe.dial(n)` helper now supports both:
+
+- `mpc2000xl`, via the digital `Data Wheel +/-1` fields
+- `mpc3000`, via its analog `Dial` field with absolute-step synthesis
 
 ## Batch port dump
 

@@ -1,7 +1,7 @@
 local exports = {
     name = "mpcprobe",
     version = "0.0.1",
-    description = "Probe MPC2000XL inputs and screen state",
+    description = "Probe Akai MPC inputs and screen state",
     license = "BSD-3-Clause",
     author = { name = "Codex" }
 }
@@ -16,6 +16,7 @@ local DEFAULT_POLL_FRAMES = 40
 local DEFAULT_CHANGE_POLL_FRAMES = 4
 local SEQUENCER_READY_SIG = "66ace03b"
 local AUTORUN_PATH = "/tmp/mpcprobe_autorun.lua"
+local analog_field_state = {}
 
 local function current_screen_signature()
     local screen = manager.machine.screens[":screen"]
@@ -38,6 +39,26 @@ local function bool_to_int(value)
     return 0
 end
 
+local function field_press_value(field)
+    local mask = tonumber(field.mask)
+    if mask and mask ~= 0 then
+        return mask
+    end
+    local def_value = tonumber(field.defvalue)
+    if def_value and def_value ~= 0 then
+        return def_value
+    end
+    return 1
+end
+
+local function release_field(field)
+    if field.is_analog then
+        field:clear_value()
+        return
+    end
+    field:set_value(0)
+end
+
 local function find_field_by_name(field_name)
     for port_tag, port in pairs(manager.machine.ioport.ports) do
         local field = port.fields[field_name]
@@ -46,6 +67,38 @@ local function find_field_by_name(field_name)
         end
     end
     return nil, nil
+end
+
+local function clamp(value, min_value, max_value)
+    if value < min_value then
+        return min_value
+    end
+    if value > max_value then
+        return max_value
+    end
+    return value
+end
+
+local function next_analog_value(field_name, field, delta)
+    local min_value = tonumber(field.minvalue) or 0
+    local max_value = tonumber(field.maxvalue) or 255
+    local def_value = tonumber(field.defvalue) or min_value
+    local current = analog_field_state[field_name]
+    if current == nil then
+        current = def_value
+    end
+
+    local span = (max_value - min_value) + 1
+    if span <= 0 then
+        local next_value = clamp(current + delta, min_value, max_value)
+        analog_field_state[field_name] = next_value
+        return next_value
+    end
+
+    local offset = (current - min_value + delta) % span
+    local next_value = min_value + offset
+    analog_field_state[field_name] = next_value
+    return next_value
 end
 
 local function dump_ports()
@@ -133,7 +186,7 @@ local function clear_field_value(field_name)
         emu.print_error("mpcprobe: field not found: " .. field_name)
         return
     end
-    field:clear_value()
+    release_field(field)
     emu.print_info(string.format("mpcprobe: cleared %s on %s", field_name, port_tag))
 end
 
@@ -166,13 +219,13 @@ local function press_field(field_name, frames)
         return
     end
     frames = frames or 1
-    field:set_value(1)
+    field:set_value(field_press_value(field))
     local remaining = frames
     local subscription
     subscription = emu.add_machine_frame_notifier(function()
         remaining = remaining - 1
         if remaining <= 0 then
-            field:clear_value()
+            release_field(field)
             if subscription then
                 subscription:unsubscribe()
             end
@@ -286,7 +339,12 @@ local function queue_dial(delta, settle_frames)
 end
 
 local function queue_combo(modifier_field_name, field_name, hold_frames, settle_frames)
-    queue_set(modifier_field_name, 1)
+    local _, modifier_field = find_field_by_name(modifier_field_name)
+    if not modifier_field then
+        emu.print_error("mpcprobe: field not found: " .. modifier_field_name)
+        return
+    end
+    queue_set(modifier_field_name, field_press_value(modifier_field))
     queue_tap(field_name, hold_frames, settle_frames)
     queue_clear_field(modifier_field_name)
 end
@@ -311,7 +369,7 @@ local function process_tap(action)
             emu.print_error("mpcprobe: field not found: " .. action.field_name)
             return true
         end
-        field:set_value(1)
+        field:set_value(field_press_value(field))
         action_state = {
             phase = "hold",
             remaining = action.hold_frames,
@@ -332,7 +390,7 @@ local function process_tap(action)
     end
 
     if action_state.phase == "hold" then
-        action_state.field:clear_value()
+        release_field(action_state.field)
         action_state.phase = "settle"
         action_state.remaining = action.settle_frames
         return action_state.remaining <= 0
@@ -511,25 +569,53 @@ end
 
 local function process_dial(action)
     if not action_state then
-        local field_name = action.delta < 0 and "Data Wheel -1" or "Data Wheel +1"
-        local _, field = find_field_by_name(field_name)
-        if not field then
-            emu.print_error("mpcprobe: field not found: " .. field_name)
-            return true
-        end
         local remaining_steps = math.abs(action.delta)
         if remaining_steps == 0 then
             return true
         end
+
+        local digital_field_name = action.delta < 0 and "Data Wheel -1" or "Data Wheel +1"
+        local _, digital_field = find_field_by_name(digital_field_name)
+        if digital_field then
+            action_state = {
+                mode = "digital",
+                phase = "pulse",
+                remaining = 1,
+                remaining_steps = remaining_steps,
+                settle_frames = action.settle_frames,
+                field = digital_field,
+                just_started = true
+            }
+            digital_field:set_value(field_press_value(digital_field))
+            return false
+        end
+
+        local analog_field_name, analog_field = find_field_by_name("Dial")
+        if not analog_field or not analog_field.is_analog then
+            emu.print_error("mpcprobe: no supported dial input found")
+            return true
+        end
+
+        local analog_settle_frames = math.max(action.settle_frames, 4)
+        local analog_step = action.delta < 0 and -1 or 1
+        local next_value = next_analog_value("Dial", analog_field, analog_step)
+
         action_state = {
-            phase = "pulse",
-            remaining = 1,
+            mode = "analog",
+            remaining = analog_settle_frames,
             remaining_steps = remaining_steps,
-            settle_frames = action.settle_frames,
-            field = field,
+            settle_frames = analog_settle_frames,
+            field = analog_field,
+            field_name = analog_field_name,
+            step = analog_step,
             just_started = true
         }
-        field:set_value(1)
+        analog_field:set_value(next_value)
+        emu.print_info(string.format(
+            "mpcprobe: set %s to %d for dial step",
+            analog_field_name,
+            next_value
+        ))
     end
 
     if action_state.just_started then
@@ -537,17 +623,40 @@ local function process_dial(action)
         return false
     end
 
-    action_state.remaining = action_state.remaining - 1
-    if action_state.remaining > 0 then
+    if action_state.mode == "analog" then
+        action_state.remaining = action_state.remaining - 1
+        if action_state.remaining > 0 then
+            return false
+        end
+
+        action_state.remaining_steps = action_state.remaining_steps - 1
+        if action_state.remaining_steps <= 0 then
+            return true
+        end
+
+        local next_value = next_analog_value("Dial", action_state.field, action_state.step)
+        action_state.remaining = action_state.settle_frames
+        action_state.just_started = true
+        action_state.field:set_value(next_value)
+        emu.print_info(string.format(
+            "mpcprobe: set %s to %d for dial step",
+            action_state.field_name,
+            next_value
+        ))
         return false
     end
 
-    if action_state.phase == "pulse" then
-        action_state.field:clear_value()
-        action_state.phase = "settle"
-        action_state.remaining = action_state.settle_frames
-        return false
-    end
+    action_state.remaining = action_state.remaining - 1
+        if action_state.remaining > 0 then
+            return false
+        end
+
+        if action_state.phase == "pulse" then
+            release_field(action_state.field)
+            action_state.phase = "settle"
+            action_state.remaining = action_state.settle_frames
+            return false
+        end
 
     action_state.remaining_steps = action_state.remaining_steps - 1
     if action_state.remaining_steps <= 0 then
