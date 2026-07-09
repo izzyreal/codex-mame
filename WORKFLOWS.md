@@ -98,6 +98,14 @@ Key rule:
   be baked into the background
 - therefore the background should pretend the soft keys do not exist and should
   have a continuous bottom border with no gaps for the six soft-key boxes
+- this is not optional and does not require user confirmation; for screen
+  backgrounds in this project, always strip baked soft-key labels, boxes, and
+  other soft-key-specific pixels from the PNG
+- opacity/no-op rule: use the smallest bounding box of the border decoration as
+  the opaque popup/window body; the title bar is a separate opaque island above
+  it and is not part of that border bbox
+- consequence: there should be no per-pixel gray/no-op holes inside the border
+  bbox itself, even near the title-bar overhang corners
 
 Renderer facts confirmed from the code:
 

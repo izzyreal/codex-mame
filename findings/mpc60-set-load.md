@@ -124,17 +124,104 @@ Visible content includes:
 - the source pad/key context from the `.SET`
 - the source filename from the `.SET`
 
+Concrete observed example from `ROCK.SET`:
+
+- title: `Load a Sound`
+- top line: `MPC60 pad:HIT CLSD (A01)`
+- second line: `File:HAT2CLSD`
+
+Concrete observed example from `UK-8.SET`:
+
+- initial state:
+  - `MPC60 pad:HIHT CLSD (A01)`
+  - `File:S7_HH_CL`
+- one slow clockwise detent:
+  - `MPC60 pad:HIHT MEDM (A01)`
+  - `File:S7_HH_MD`
+- second slow clockwise detent:
+  - `MPC60 pad:HIHT OPEN (A01)`
+  - `File:S7_HH_OP`
+- third slow clockwise detent:
+  - `MPC60 pad:SNR1      (A02)`
+  - `File:UK-SN31`
+- fourth slow clockwise detent:
+  - `MPC60 pad:SNR2      (A03)`
+  - `File:UK-RIM32`
+- then, still with slow single-detent spacing:
+  - `A04`: `BASS` / `UK-BD11`
+  - `A05`: `TOM1` / `S7_ROTO1`
+  - `A06`: `TOM2` / `S7_ROTO2`
+  - `A07`: `TOM3` / `S7_ROTO3`
+  - `A08`: `TOM4` / `S7_ROTO4`
+  - `A09`: `RID1` / `S7_RIDE1`
+  - `A10`: `RID2` / `S7_RIDE2`
+  - `A11`: `CRS1` / `S7_CRS1`
+  - `A12`: `CRS2` / `S7_CHINA`
+  - `A13`: `PRC1` / `FINGER_CLICK`
+  - `A14`: `PRC2` / `HAND_CLAP`
+  - `A15`: `PRC3` / `METAL`
+  - `A16`: `PRC4` / `WHIP_CLAP`
+  - `B01` through `B08`: `DR01` through `DR08`, all with `File:(no assign)`
+
+Additional behavior confirmed on `UK-8.SET`:
+
+- this screen is sensitive to dial cadence
+- a too-fast sequence of nominal `+1` detents can skip intermediate entries
+  and produce incorrect conclusions
+- the reliable probe cadence here was a single detent with a much slower settle
+  (`actions.turn_dial(1, 10)` in the current automation helper)
+- `CANCEL` returns to `Load a SET`
+- reopening the screen after `CANCEL` resets it to the initial source pad
+  (`HIHT CLSD (A01)`)
+- the initial screenshot and the post-`CANCEL` reopened screenshot are
+  byte-identical
+- the `File:` row is not an independently focusable/editable field:
+  - pressing `Down` from `DR01      (B01)` produced no LCD change
+- pressing `LOAD` while the current source pad is unassigned produced no LCD
+  change at all
+- the unassigned screenshot, the post-`Down` screenshot, and the post-`LOAD`
+  screenshot are byte-identical
+- pressing `LOAD` while the current source pad is assigned eventually lands on
+  the ordinary `load-a-sound` screen:
+  - observed final state:
+    - `File:S7_HH_CL`
+    - highlighted target note value visually reads `60/C05`
+
 Interpretation:
 
 - this is a `.SET`-specific pre-screen
 - it is not the same screen as the existing ordinary sound-file
   `load-a-sound` screen
+- the parenthesized suffix on the top line is not the conversion-table target
+  pad such as `A03`; it is the MPC60 source slot label shown by the firmware
+  on this screen
+- that source-slot label advances as `A01`, `A02`, `A03`, ... and rolls into
+  `B01`, etc.
+- the source-pad naming on this screen uses firmware abbreviations such as
+  `HIT CLSD`, not the more literal reverse-engineering names like `HIHT CLSD`
+- the `File:` row is a single non-focusable inline label/value presentation,
+  not a separate editable field
 
 Confirmed branch detail:
 
+- `CANCEL` on this screen returns one layer back to `Load a SET`
 - the affirmative action shows a transient `Loading ...` message
+- that transient popup is shown over the `.SET`-specific screen first
 - after that transient message, the flow lands on the ordinary
   `load-a-sound` screen
+
+Concrete observed `LOAD` path from `ROCK.SET`:
+
+1. `.SET`-specific `Load a Sound` shows:
+   - `MPC60 pad:HIT CLSD (A01)`
+   - `File:HAT2CLSD`
+2. Press `LOAD`.
+3. Observe transient popup over the same screen:
+   - `Loading HAT2CLSD`
+4. After the transient popup clears, the flow lands on the ordinary
+   `load-a-sound` screen showing:
+   - `File:HAT2CLSD`
+   - `Assign to note:60/C05`
 
 Important naming distinction:
 
@@ -219,6 +306,22 @@ Practical rule for future screens:
   regions are masked to `(65, 65, 65)` and owned pixels are reduced to exact
   black or exact white.
 - Do not bake soft/function keys into background PNGs; they are procedural.
+
+Specific `conversion-table` lesson:
+
+- an older scaled crop was not authoritative enough for the lower border
+  decoration
+- the reliable source was a fresh native `248x60` LCD snapshot captured again
+  from MAME after navigating back to the screen
+- the resulting comparison showed that the real problem was not modal width and
+  not transparent-gray ownership
+- the real problem was a one-row vertical phase error in the lower border
+  sequence, starting around row `50`
+- `conversion-table` shares the same popup-family lower border sequence as
+  `load-a-program`
+- when this screen or similar screens are rebuilt in the future, compare the
+  lower border row-by-row against a fresh native capture before trusting an
+  inherited crop
 
 This finding also points toward a better long-term approach: extract the real
 MPC2000XL font and border-decoration glyphs from firmware and generate these
