@@ -39,6 +39,9 @@ Timing rules:
   about `4` frames, roughly `50 ms`
 - use slower stability checks only for boot completion or “has the UI settled?”:
   about `40` frames, roughly `500 ms`
+- for exact field inference, trust only fresh native `x1` LCD snapshots
+- use enlarged `x4` or `x8` renders only as viewing aids, never as the primary
+  evidence source
 
 Do not:
 
@@ -54,6 +57,9 @@ Do not:
   changes while the current LCD already shows a plausible path to the goal
 - do not treat sent inputs as proof of machine state; only the observed LCD
   state counts
+- do not assume a queued MAME command has already taken effect just because it
+  was accepted by the console; verify with `wait_change`, a fresh snapshot, or
+  both
 
 Use local scripts only after a flow is already understood and repeatable. Use
 Codex-in-the-loop interaction when judgment is still required.

@@ -126,6 +126,16 @@ Confirmed differences from the MPC2000XL workflow:
 - `mpcprobe.dial(n)` now works for `mpc3000` by stepping that analog `Dial`
   field with absolute-value updates; prefer this over ad hoc `queue_set("Dial", ...)`
 
+Operational rule for live-console probing:
+
+- treat `mpcprobe` commands as asynchronous queue submissions
+- after each meaningful button or dial action, wait for an LCD change and then
+  capture a fresh snapshot before inferring the new state
+- if the snapshot still shows the old state, do not continue the planned flow
+  as if the action landed; re-evaluate from the LCD instead
+- when a field-level distinction matters, inspect the native `x1` snapshot and
+  use `x4` or `x8` renders only as reading aids
+
 ## MPC3000 Save SEQ Authoring
 
 Minimal confirmed path to author a real note-bearing `.SEQ` fixture in MAME:
