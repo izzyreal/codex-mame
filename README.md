@@ -48,9 +48,27 @@ Do not:
 - do not script speculative multi-step paths and hope they land correctly
 - do not consolidate a flow into a local script until the same path has already
   been verified repeatedly through LCD feedback
+- do not abandon a still-viable live on-screen path just because one input or
+  one navigation assumption failed
+- do not pivot to host-side file surgery, new disk images, or other setup
+  changes while the current LCD already shows a plausible path to the goal
+- do not treat sent inputs as proof of machine state; only the observed LCD
+  state counts
 
 Use local scripts only after a flow is already understood and repeatable. Use
 Codex-in-the-loop interaction when judgment is still required.
+
+First question after every snapshot:
+
+1. what does the full screen say right now?
+2. can the current visible state already get me to the goal?
+3. if yes, continue from the LCD instead of changing the environment
+
+Before any save, load, clear, overwrite, or other state-freezing action, add
+one more question:
+
+4. has the exact target state been visibly confirmed on the LCD immediately
+   before this commit action?
 
 ## Operating Principle
 
@@ -78,6 +96,70 @@ driven interactively through Codex.
 
 In short: Codex decides, local scripts execute. Keep Codex in the loop for
 thinking, not for button mashing.
+
+## Execution Ladder
+
+Use the narrowest layer that can finish the next chunk of work.
+
+### Level 1: Local Reactive Loop
+
+Preferred whenever the happy path is known and only short-range feedback is
+needed.
+
+Characteristics:
+
+- local observe -> act -> observe loop
+- bounded conditionals based on expected LCD states
+- no cloud consultation between ordinary steps
+
+Use this for:
+
+- boot and wait-until-ready
+- opening known screens
+- directory-window navigation once the visible file list is understood
+- repeated cursor moves, dial moves, and soft-key presses with explicit LCD
+  guards
+
+### Level 2: Local Script With Happy/Unhappy Paths
+
+Preferred for medium-length routines that are mostly known but can fail in a
+small number of predictable ways.
+
+Characteristics:
+
+- scripted happy path
+- explicit unhappy-path exits when expected LCD states do not appear
+- stop locally and surface the failure rather than improvising blindly
+
+Use this for:
+
+- load-file flows
+- save-file flows
+- screen-capture sweeps
+- repeatable reverse-engineering probes with a few known branches
+
+### Level 3: Cloud-in-the-Loop Reasoning
+
+Use only when local rules are no longer enough.
+
+Triggers:
+
+- the LCD state is ambiguous
+- the screen contradicts the expected model
+- a new behavior must be interpreted
+- a local script hit an unhappy path it does not know how to resolve
+
+Rule:
+
+- consult the cloud for interpretation and next-step planning
+- once the new path is understood, push the mechanical portion back down into a
+  local loop or script
+
+Target posture:
+
+- cloud for interpretation
+- local for execution
+- LCD for truth
 
 ## Layout
 

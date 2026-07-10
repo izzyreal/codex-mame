@@ -6,6 +6,34 @@ These are intentionally more concrete than `README.md`. If a workflow is known
 and repeatable, it should be recorded here so future agents do not spend cloud
 time rediscovering basic button sequences.
 
+## Full-Screen Reading Rule
+
+Before changing strategy, read the whole LCD like a human would.
+
+Required questions after every snapshot:
+
+1. what is currently visible across the full screen?
+2. what fields, filenames, soft keys, and highlights are already available?
+3. can the current visible state already reach the goal with ordinary
+   navigation?
+
+Do not fixate on a single field or on the last attempted input. Many mistakes
+come from noticing only the small area that was expected to change, while the
+rest of the LCD already contains a usable path forward.
+
+Concrete anti-pattern:
+
+- an input assumption fails
+- instead of rereading the whole screen, the workflow pivots to rebuilding disk
+  images, changing setup, or inventing a new environment
+
+Preferred pattern:
+
+- reread the full LCD
+- use the currently visible path if one exists
+- only escalate to environment changes after the live on-screen path is truly
+  exhausted
+
 ## UI Editing Rule Of Thumb
 
 On this MPC UI family, if a field can be highlighted, it can be edited.
@@ -68,6 +96,9 @@ Notes:
   `DO IT`, `LOAD`, `CLEAR`, save confirmation, or similar soft-key commits.
 - If this flow works reliably in automation, script it locally instead of
   driving it interactively through Codex.
+- If the Directory Window is already open and shows the target family of files,
+  stay in that live path. Do not switch to host-side disk-image surgery merely
+  because one navigation step behaved unexpectedly.
 
 ## `.SET` Initial Investigation Goal
 
@@ -104,12 +135,18 @@ Minimal confirmed path to author a real note-bearing `.SEQ` fixture in MAME:
    `<Cancel>` to skip the long SCSI scan.
 3. From the main screen, open `Step Edit`.
 4. Press `Soft Key 1` for `<Insert>`.
-5. This opens an inline note-event template at the current tick.
-6. Press `Soft Key 1` again to commit the inserted event.
+5. This opens an inline note-event template at the current tick; edit the
+   fields in place until they hold the intended values.
+6. Verify on the LCD that exactly one event is present and that no extra
+   default insert row has been created.
 7. Press `Disk`.
 8. Press `1` for `Save a sequence`.
 9. On the `Save a Sequence` screen, press `Soft Key 1` for `<Do it>`.
 10. If `File exists. Replace?` appears, press `Soft Key 3` for `<Yes>`.
+
+There is no established separate "commit" action for the inserted event.
+Treat `Soft Key 1` literally as `Insert`; pressing it again risks creating a
+second event.
 
 Confirmed result:
 
@@ -118,6 +155,38 @@ Confirmed result:
   `/Users/izmar/git/vmpc-juce/editables/mpc/test-resources/RealMpc3000/Seq/M3KNOTE.SEQ`
 - overwrite-confirmed save artifact from July 9, 2026:
   `/tmp/M3KSAVE1.SEQ`
+
+## MPC3000 Tempo Save Discipline
+
+Tempo save probing produced a concrete anti-pattern and a concrete rule.
+
+Anti-pattern:
+
+- assuming the intended tempo edit landed because the right inputs were sent
+- then saving and debugging the file artifact as if the save path were at fault
+
+Required discipline:
+
+1. edit tempo
+2. verify the LCD shows the new tempo on the exact screen that will be saved
+3. only then enter the save flow
+4. if overwrite confirmation appears, explicitly confirm it
+5. wait until the save finishes and the UI settles again
+6. only then extract and inspect the file
+
+Observed valid example:
+
+- main screen showed `BPM:119.0 (SEQ)`
+- `Disk` -> `1` -> `Save a Sequence` -> `<Do it>` -> overwrite `<Yes>`
+- extracted `SEQ01.SEQ` then parsed as `header_tempo=119`
+
+Interpretation rule:
+
+- if a saved `.SEQ` disagrees with the expected tempo, first suspect operator
+  error or a missed confirmation before suspecting the file format
+- preserve the provenance chain:
+  LCD before save -> save screen -> overwrite screen if any -> post-save screen
+  -> extracted file -> probe result
 
 ## MPC3000 Step Edit Caution
 
@@ -230,6 +299,32 @@ task.
 10. Keep process state clean.
    Ensure exactly one emulator instance is running before and after each probe.
    Do not trust observations if more than one instance exists.
+
+## Escalation Ladder
+
+## LCD Reading
+
+- Always confirm the snapshot provenance before decoding it. A stale file name can waste a whole OCR/debug pass.
+- For MPC2000XL LCD work, prefer fresh native `248x60` MAME captures over inherited or scaled crops.
+- The VMPC bitmap font is the right first reference for OCR work, because the glyphs themselves match well.
+- If decoding fails, first suspect stale snapshot provenance or wrong sampling geometry before blaming the font.
+- The hard part is usually exact field origin, padding, border overlap, and inversion state, not the letterforms themselves.
+- For browser-like screens, use supervised template learning from a fresh calibration snapshot and then score whole candidate strings against later snapshots.
+- When a row or field becomes highlighted, treat that as an inversion problem, not as a different font.
+- If a calibrated decoder degrades after selection moves, add the new state as another calibration sample instead of inventing a new interaction theory.
+
+When a probe slows down, do not jump directly from live interaction to a totally
+new setup. Escalate in this order:
+
+1. reread the current LCD fully
+2. try the next obvious local navigation step
+3. use a small local reactive loop with explicit LCD guards
+4. use a larger local script with happy and unhappy paths
+5. consult the cloud or the human only when the unhappy path is genuinely
+   reached
+
+This is the default discipline for keeping wall-clock time down without losing
+behavioral rigor.
 
 ## Background PNG Generation
 
