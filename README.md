@@ -174,6 +174,10 @@ Target posture:
 - `findings/`: reverse-engineering notes and discovered screen flows
 - `findings/firmware/mpc2000xl-data-wheel-re.md`: focused firmware-side note
   for the MPC2000XL data wheel path
+- `scripts/mpc_lcd_reader.py`: BMFont-based helper for reading native `248x60`
+  MPC LCD screenshots without relying on generic OCR
+- `scripts/probes/uk8/`: durable one-off probe scripts kept because they were
+  useful for validating the MPC60 `.SET` pad sweep and dial-cadence behavior
 
 ## Reference Assets
 
