@@ -239,6 +239,10 @@ Target posture:
   `248x60` MPC LCD screenshots without relying on generic OCR; supports both
   the VMPC BMFont path for MPC2000XL and the extracted `hd61830.bin` font path
   for MPC60 text-mode screens
+- `scripts/mpc60_live_controller.py`: host-side MPC60 bridge controller for
+  observe -> interpret -> act loops. Its file-browser flow samples a short
+  blink window so highlighted filenames are read from a frame where the cursor
+  block is not hiding text, instead of relying on filename heuristics.
 - `scripts/probes/uk8/`: durable one-off probe scripts kept because they were
   useful for validating the MPC60 `.SET` pad sweep and dial-cadence behavior
 

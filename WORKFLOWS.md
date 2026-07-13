@@ -641,6 +641,12 @@ task.
 - For browser-like screens, use supervised template learning from a fresh calibration snapshot and then score whole candidate strings against later snapshots.
 - When a row or field becomes highlighted, treat that as an inversion problem, not as a different font.
 - If a calibrated decoder degrades after selection moves, add the new state as another calibration sample instead of inventing a new interaction theory.
+- If a highlighted field includes a blinking cursor block, sample several
+  consecutive frames without sending input. Treat the different OCR strings as
+  blink variants of the same screen state and prefer the frame where the
+  underlying text is fully visible. Do not use target-specific shortcuts such
+  as "drop the first character"; humans wait for the blink phase, and the local
+  tooling should do the same.
 - Two-tone PNG captures should be decoded as exact two-level images; do not use
   a hardcoded grayscale threshold when the image already exposes exactly two
   visible gray values.
