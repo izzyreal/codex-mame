@@ -386,6 +386,18 @@ Concrete confirmed MPC60 path:
 2. press `Soft Key 1` once for `<Insert>`
 3. verify a note row is visible
 4. press `Disk`
+
+For byte-probe corpora, keep one live MPC60 instance open for the whole batch:
+
+1. load the source data once
+2. create every planned renamed variant on the device
+3. save all variants to the attached disk
+4. cleanly exit MAME once, so disk writes flush
+5. only then inspect the disk image from the host
+
+Do not repeatedly boot, save one file, clean-exit, inspect, restore, and repeat
+unless the probe genuinely requires separate machine state. Disk inspection
+before clean exit is not authoritative because MAME still owns pending writes.
 5. continue into `Save a sequence` or `Save all seqs/songs`
 
 ## MPC60 SCSI Firmware Split

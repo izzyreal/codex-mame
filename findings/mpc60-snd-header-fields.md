@@ -35,6 +35,17 @@ Offset `0x26`, `u1`: `velocity_to_volume_percent`
   `0x63`
 - Packed sample data remained byte-identical
 
+Offset `0x21..0x25`, five bytes: reserved zeroes
+
+- Observed as `00 00 00 00 00` in all 42 preserved MPC60 SND files checked.
+- The MPC60 v3.10 manual describes standalone SND contents as sound name,
+  sample data, tuning, volume, soft start, and soft end.
+- Native MPC60 2.14 `ROCK.SET` sound-directory entries vary in pitch factor,
+  attack rate, mix volume/pan, output, echo, and sound characteristics, but the
+  corresponding standalone SND exports keep `0x21..0x25` zero.
+- Current conclusion: this is a reserved zero region in the MPC60 SND v1
+  header, not copied SET directory state.
+
 ## Caveat
 
 `JAUND017.SND`, produced by loading an MPC3000 SND on hardware MPC60 and
