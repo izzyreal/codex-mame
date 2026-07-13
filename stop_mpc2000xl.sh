@@ -3,12 +3,13 @@ set -eu
 
 PATTERN="/Users/izmar/git/mame/mame .*mpc2000xl"
 
-while true; do
-  pids=$(pgrep -f "$PATTERN" || true)
-  if [ -z "$pids" ]; then
-    exit 0
-  fi
-  printf '%s
-' "$pids" | xargs kill -9
-  sleep 0.2
-done
+pids=$(pgrep -f "$PATTERN" || true)
+if [ -z "$pids" ]; then
+  exit 0
+fi
+
+printf '%s\n' "mpc2000xl is already running; this helper will not stop it." >&2
+printf '%s\n' "Cleanly exit the live MAME console with: manager.machine:exit()" >&2
+printf '%s\n' "Running PID(s):" >&2
+printf '%s\n' "$pids" >&2
+exit 1

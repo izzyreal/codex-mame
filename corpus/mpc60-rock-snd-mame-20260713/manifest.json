@@ -1,0 +1,304 @@
+{
+  "producer": {
+    "model": "MPC60",
+    "environment": "MAME",
+    "firmware": "2.14",
+    "source_set": "ROCK.SET",
+    "export_flow": "MPC60 firmware Save a Sound, one sound at a time",
+    "distinction": "Native MPC60 firmware 2.14 SND output, not MPC2000XL v1.20 SET import/export output."
+  },
+  "source_image": "/tmp/mpc60scsi_10mb.img",
+  "source_image_sha1": "21f41dc96f8e4552855dfcb725befa96bd4804ed",
+  "bytes_per_sector": 512,
+  "sectors_per_cluster": 16,
+  "cluster_size": 8192,
+  "entries": [
+    {
+      "name": "BIG_CLAP.SND",
+      "size": 36039,
+      "first_cluster": 97,
+      "clusters": [
+        97,
+        98,
+        99,
+        100,
+        101
+      ],
+      "cluster_count": 5,
+      "sha1": "52758e42335070ccf11041774eeabb3796a64e87",
+      "header_hex": "01014249475f434c4150202020202020202000c05d00000000580200005e01640000000000006400110000010000000000f1ffff0f0000000000f0ffffffff00",
+      "size_mod_3": 0
+    },
+    {
+      "name": "BASSGUIT.SND",
+      "size": 12039,
+      "first_cluster": 102,
+      "clusters": [
+        102,
+        103
+      ],
+      "cluster_count": 2,
+      "sha1": "2c170aeb62588c61c5ca508aa28c7513d3dcb128",
+      "header_hex": "01014241535347554954202020202020202000401f00000000c80000003200640000000000006401e80102730202cb0202fd02026c0202d00101890101b30000",
+      "size_mod_3": 0
+    },
+    {
+      "name": "HAT2CLSD.SND",
+      "size": 24039,
+      "first_cluster": 104,
+      "clusters": [
+        104,
+        105,
+        106
+      ],
+      "cluster_count": 3,
+      "sha1": "b001dbab301f73b317cab44270ef7125f1067f3c",
+      "header_hex": "010148415432434c5344202020202020202000803e00000000900100006400640000000000006400540000530000330000450000440000350000540000340000",
+      "size_mod_3": 0
+    },
+    {
+      "name": "HAT2MED.SND",
+      "size": 36039,
+      "first_cluster": 107,
+      "clusters": [
+        107,
+        108,
+        109,
+        110,
+        111
+      ],
+      "cluster_count": 5,
+      "sha1": "896f25adf1457b0185063a80053d0df682c84f86",
+      "header_hex": "0101484154324d454420202020202020202000c05d00000000580200006400640000000000006400550000430000440000440000340000440000550000430000",
+      "size_mod_3": 0
+    },
+    {
+      "name": "HAT2OPN.SND",
+      "size": 60039,
+      "first_cluster": 112,
+      "clusters": [
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119
+      ],
+      "cluster_count": 8,
+      "sha1": "f3df50a56fdd83c47817bd9232cd07b8f4122f2b",
+      "header_hex": "0101484154324f504e20202020202020202000409c00000000e8030000c800640000000000006400440000440000340000440000340000440000440000330000",
+      "size_mod_3": 0
+    },
+    {
+      "name": "SNARE#2.SND",
+      "size": 30039,
+      "first_cluster": 120,
+      "clusters": [
+        120,
+        121,
+        122,
+        123
+      ],
+      "cluster_count": 4,
+      "sha1": "a1d96984e682c963a4e07f954b15937b097a392c",
+      "header_hex": "0101534e415245233220202020202020202000204e00000000f40100006400640000000000006400110000010000110000000000110000110000110000110000",
+      "size_mod_3": 0
+    },
+    {
+      "name": "SIDESTK2.SND",
+      "size": 24039,
+      "first_cluster": 124,
+      "clusters": [
+        124,
+        125,
+        126
+      ],
+      "cluster_count": 3,
+      "sha1": "80fa055ce7f3239eaa278e3df924396a959cd7a8",
+      "header_hex": "01015349444553544b32202020202020202000803e000000009001000064006400000000000064ff22fffff0feff10fffe0fffff03ffff11fffe2fffffe0feff",
+      "size_mod_3": 0
+    },
+    {
+      "name": "KICK#2.SND",
+      "size": 24039,
+      "first_cluster": 127,
+      "clusters": [
+        127,
+        128,
+        129
+      ],
+      "cluster_count": 3,
+      "sha1": "3dc396d32fc2fa012b52b1aabb88b503a7b8e7c6",
+      "header_hex": "01014b69434b23322020202020202020202000803e00000000900100006400640000000000006400220000220000220000220000210000220000220000220000",
+      "size_mod_3": 0
+    },
+    {
+      "name": "ROCTOMID.SND",
+      "size": 48039,
+      "first_cluster": 130,
+      "clusters": [
+        130,
+        131,
+        132,
+        133,
+        134,
+        135
+      ],
+      "cluster_count": 6,
+      "sha1": "afb234360901c83fc4b1baa62b9862dd310ec489",
+      "header_hex": "0101524f43544f4d4944202020202020202000007d00000000200300005e01640000000000006400120000220000220000220000120000220000220000220000",
+      "size_mod_3": 0
+    },
+    {
+      "name": "ROCTOMLO.SND",
+      "size": 90039,
+      "first_cluster": 136,
+      "clusters": [
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        144,
+        145,
+        146
+      ],
+      "cluster_count": 11,
+      "sha1": "692507c9d8a99874ba94eb0cf28428a5e2b3f3ec",
+      "header_hex": "0101524f43544f4d4c4f20202020202020200060ea00000000dc0500008403640000000000006400f0ff00f0ff000000ffffffff0f0000f0ffff0f00ff0f00ff",
+      "size_mod_3": 0
+    },
+    {
+      "name": "RIDE4B.SND",
+      "size": 57699,
+      "first_cluster": 147,
+      "clusters": [
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154
+      ],
+      "cluster_count": 8,
+      "sha1": "e4e9ad5d0b9c52b2d555ad7d3263821cc1f5dd6a",
+      "header_hex": "01015249444534422020202020202020202000289600000000c1030000ac0064000000000000641798bdfbef05fb44110903f9f8550b18adfbe819e3f5d3efe0",
+      "size_mod_3": 0
+    },
+    {
+      "name": "CRASH_MU.SND",
+      "size": 43329,
+      "first_cluster": 155,
+      "clusters": [
+        155,
+        156,
+        157,
+        158,
+        159,
+        160
+      ],
+      "cluster_count": 6,
+      "sha1": "7f68d95efa138f1a8d25a84255704cfff84d3bad",
+      "header_hex": "010143524153485f4d55544520202020202000bc70000000007a0200007500640000000000006400020000020000130000020000130000130000020000120000",
+      "size_mod_3": 0
+    },
+    {
+      "name": "CRASH2_L.SND",
+      "size": 106053,
+      "first_cluster": 161,
+      "clusters": [
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173
+      ],
+      "cluster_count": 13,
+      "sha1": "14771deef928b15dd71e1ccbb318aec1eca91680",
+      "header_hex": "01014352415348325f4c202020202020202000141401000000e60600000501640000000000006494b93100150000220000120000130000310000020000240000",
+      "size_mod_3": 0
+    },
+    {
+      "name": "CRASH2_H.SND",
+      "size": 59739,
+      "first_cluster": 174,
+      "clusters": [
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181
+      ],
+      "cluster_count": 8,
+      "sha1": "be80ce11017feeba544a663876efe58d4cc7c787",
+      "header_hex": "01014352415348325f48202020202020202000789b00000000e3030000a300640000000000006494b93100040000140000110000110000130000130000110000",
+      "size_mod_3": 0
+    },
+    {
+      "name": "METALSHO.SND",
+      "size": 16179,
+      "first_cluster": 182,
+      "clusters": [
+        182,
+        183
+      ],
+      "cluster_count": 2,
+      "sha1": "39e364235099573eb3fd7dbc9dad97094fa29be0",
+      "header_hex": "01014d4554414c53484f542020202020202000082a000000000d0100008300640000000000006495c130ffb9ffff88ffffb8ffff5affff8cffff8cffff89ffff",
+      "size_mod_3": 0
+    },
+    {
+      "name": "GONG.SND",
+      "size": 78639,
+      "first_cluster": 184,
+      "clusters": [
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193
+      ],
+      "cluster_count": 10,
+      "sha1": "3489c08bdce80f65c941ac5784d0d426efeaa557",
+      "header_hex": "0101474f4e4720202020202020202020202000b0cc000000001e0500009400640000000000006493db340060fefc69fbf923f8f633f5f3a7f2f1aef1f233f1f1",
+      "size_mod_3": 0
+    },
+    {
+      "name": "COWBEL#1.SND",
+      "size": 21039,
+      "first_cluster": 194,
+      "clusters": [
+        194,
+        195,
+        196
+      ],
+      "cluster_count": 3,
+      "sha1": "02147771c2b28b93b7b855a51616280bcfcdfe50",
+      "header_hex": "0101434f5742454c2331202020202020202000b036000000005e0100006400640000000000006400540000450000460000660000640000450000550000550000",
+      "size_mod_3": 0
+    }
+  ]
+}

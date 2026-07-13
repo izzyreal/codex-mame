@@ -122,10 +122,10 @@ def load_png_bw(path: Path) -> list[list[bool]]:
 
     raw = zlib.decompress(bytes(idat))
     image = unfilter_png_scanlines(raw, width, height, channels)
-    rows: list[list[bool]] = []
+    grayscale_pixels: list[list[tuple[int, int]]] = []
 
     for y in range(height):
-        row: list[bool] = []
+        row: list[tuple[int, int]] = []
         offset = y * width * channels
         for x in range(width):
             base = offset + x * channels
@@ -150,8 +150,34 @@ def load_png_bw(path: Path) -> list[list[bool]]:
                 r, g, b, alpha = image[base : base + 4]
                 gray = (299 * r + 587 * g + 114 * b) // 1000
 
-            row.append(alpha >= 128 and gray < 200)
-        rows.append(row)
+            row.append((gray, alpha))
+        grayscale_pixels.append(row)
+
+    visible_grays = sorted(
+        {
+            gray
+            for row in grayscale_pixels
+            for gray, alpha in row
+            if alpha >= 128
+        }
+    )
+
+    # MAME LCD captures are often strict two-tone grayscale. In that case, use
+    # the darker visible tone as ink instead of a global hardcoded threshold.
+    if len(visible_grays) == 2:
+        foreground_gray = visible_grays[0]
+
+        def is_foreground(gray: int, alpha: int) -> bool:
+            return alpha >= 128 and gray == foreground_gray
+
+    else:
+
+        def is_foreground(gray: int, alpha: int) -> bool:
+            return alpha >= 128 and gray < 200
+
+    rows: list[list[bool]] = []
+    for row in grayscale_pixels:
+        rows.append([is_foreground(gray, alpha) for gray, alpha in row])
 
     return rows
 
@@ -287,6 +313,40 @@ def build_templates(
                 cy = glyph.yoffset + y
                 if 0 <= cx < CELL_WIDTH and 0 <= cy < CELL_HEIGHT:
                     cell[cy][cx] = atlas[glyph.atlas_y + y][glyph.atlas_x + x]
+
+        templates[chr(codepoint)] = cell
+
+    return templates
+
+
+def build_hd61830_templates(
+    rom_path: Path, *, low: int = 32, high: int = 126
+) -> dict[str, list[list[bool]]]:
+    rom = rom_path.read_bytes()
+    templates: dict[str, list[list[bool]]] = {}
+
+    for codepoint in range(low, high + 1):
+        cell = make_empty_matrix(CELL_HEIGHT, CELL_WIDTH)
+
+        if 0x20 <= codepoint < 0x80:
+            base = (codepoint - 0x20) * 7
+            row_count = 7
+        elif 0xA0 <= codepoint < 0xE0:
+            base = 96 * 7 + (codepoint - 0xA0) * 7
+            row_count = 7
+        elif 0xE0 <= codepoint <= 0xFF:
+            base = 160 * 7 + (codepoint - 0xE0) * 11
+            row_count = 8
+        else:
+            continue
+
+        if base + row_count > len(rom):
+            raise ValueError(f"HD61830 ROM too short for codepoint 0x{codepoint:02x}")
+
+        for y in range(min(row_count, CELL_HEIGHT)):
+            bits = rom[base + y]
+            for x in range(CELL_WIDTH):
+                cell[y][x] = bool((bits >> x) & 1)
 
         templates[chr(codepoint)] = cell
 
@@ -445,8 +505,9 @@ def auto_decode_screen(
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--font-fnt", type=Path, required=True)
-    parser.add_argument("--font-bmp", type=Path, required=True)
+    parser.add_argument("--font-fnt", type=Path)
+    parser.add_argument("--font-bmp", type=Path)
+    parser.add_argument("--hd61830-rom", type=Path)
     parser.add_argument("--image", type=Path, required=True)
     parser.add_argument("--x", type=int)
     parser.add_argument("--y", type=int)
@@ -461,8 +522,22 @@ def main() -> None:
     parser.add_argument("--search-y-to", type=int)
     args = parser.parse_args()
 
-    glyphs = parse_bmfont(args.font_fnt)
-    templates = build_templates(args.font_bmp, glyphs)
+    using_bmfont = args.font_fnt is not None or args.font_bmp is not None
+    using_hd61830 = args.hd61830_rom is not None
+
+    if using_bmfont == using_hd61830:
+        parser.error(
+            "specify either --font-fnt with --font-bmp, or --hd61830-rom"
+        )
+
+    if using_bmfont:
+        if args.font_fnt is None or args.font_bmp is None:
+            parser.error("--font-fnt and --font-bmp must be provided together")
+        glyphs = parse_bmfont(args.font_fnt)
+        templates = build_templates(args.font_bmp, glyphs)
+    else:
+        templates = build_hd61830_templates(args.hd61830_rom)
+
     image_bits = load_bw_image(args.image)
 
     if args.auto:

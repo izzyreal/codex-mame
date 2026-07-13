@@ -6,8 +6,8 @@ PLUGIN_PATHS='/Users/izmar/git/codex-mame/plugins;/Users/izmar/git/mame/plugins'
 MAME_BIN="$MAME_DIR/mame"
 HD_IMAGE=/tmp/MPC2000XL_32MB.hd
 
-# Keep the live probing entrypoint single-instance so we do not end up
-# driving one emulator process while looking at another one.
+# Preflight only: this refuses to continue if an instance is already running.
+# Clean shutdown must be done from the live console with manager.machine:exit().
 /Users/izmar/git/codex-mame/stop_mpc2000xl.sh
 
 cd "$MAME_DIR"

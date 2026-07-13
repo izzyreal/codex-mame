@@ -27,9 +27,9 @@ The panel ROM contains the build string:
 
 ## Instrumentation Added
 
-`mpcprobe` now supports an autorun hook:
+`mpcprobe` supports explicit script execution via:
 
-- path: `/tmp/mpcprobe_autorun.lua`
+- `mpcprobe.run_script("/absolute/path.lua")`
 - plugin file: `/Users/izmar/git/codex-mame/plugins/mpcprobe/init.lua`
 
 This was added so one-shot MAME probing can be run through the normal wrapper

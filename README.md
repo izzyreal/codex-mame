@@ -18,6 +18,32 @@ Core loop:
 This workspace should be operated like a diligent human engineer using the LCD
 as ground truth, not like a speculative batch runner.
 
+Three hard rules override almost everything else:
+
+1. LCD authority.
+   The emulated machine's current LCD state is the source of truth. Sent inputs,
+   remembered cursor positions, host-side file listings, and prior successful
+   runs are not proof of current machine state.
+
+2. Device-side filesystem authority.
+   When working in file browsers or load/save screens, trust only what the
+   device currently shows. Host-mounted disk images are supporting evidence at
+   best. Do not assume the host view and the device view name or classify files
+   the same way.
+
+3. Single-instance discipline.
+   Before trusting any observation, verify that exactly one relevant MAME
+   instance is running. If multiple instances exist, stop and clean that up
+   first.
+
+4. Three-strikes diligence escalation.
+   If the same kind of step has failed about three times, stop operating at
+   that abstraction level. Do not keep improvising, broadening the plan, or
+   adding more speculative automation. Drop to a lower-level, more falsifiable
+   loop:
+   one minimal operation, exact before/after observation, one narrow factual
+   question, then rebuild confidence from proven facts.
+
 Mandatory references before guessing UI movement:
 
 - `/Users/izmar/git/vmpc-juce/editables/mpc/resources/screens/layer1.json`
@@ -32,6 +58,29 @@ oracle for cursor movement:
 - index `1`: right
 - index `2`: up
 - index `3`: down
+
+Storage and process rules:
+
+- host-side filesystem inspection is a supporting tool, not the authority
+- on macOS, treat `fseventsd`, AppleDouble sidecars, and other host metadata as
+  environmental noise, not as evidence about what the MPC itself will show
+- do not mount MPC working images in macOS unless the task explicitly requires
+  it and the risk is acceptable; prefer direct raw-image inspection or direct
+  image editing instead
+- keep image container identity explicit at all times:
+  raw images, CHD containers, extracted raws, backups, and diffs must all have
+  distinct names and must never overwrite each other
+- before reusing any disk artifact, verify its actual file type and size rather
+  than trusting the filename or extension
+- when a file-browser path already exists on the device, prefer navigating that
+  path over rebuilding disks or mutating images from the host side
+- before launching a new emulator session, verify that no stale instance of the
+  same machine is still running; if one exists, cleanly exit it from the live
+  console
+- immediately after launch, verify that exactly one intended instance exists
+- when ending any session, especially after writes or formatting, exit MAME
+  cleanly with `manager.machine:exit()`; do not use force-kill cleanup as a
+  normal workflow
 
 Timing rules:
 
@@ -55,11 +104,18 @@ Do not:
   one navigation assumption failed
 - do not pivot to host-side file surgery, new disk images, or other setup
   changes while the current LCD already shows a plausible path to the goal
+- do not assume a host-mounted FAT image gives a complete or semantically exact
+  view of what the MPC browser will show; when the two disagree, the device
+  view wins
+- do not overwrite a container path with an extracted raw image or vice versa
 - do not treat sent inputs as proof of machine state; only the observed LCD
   state counts
 - do not assume a queued MAME command has already taken effect just because it
   was accepted by the console; verify with `wait_change`, a fresh snapshot, or
   both
+- do not keep retrying the same failing class of step past roughly three
+  attempts without deliberately dropping to a lower-level observe-act-observe
+  loop
 
 Use local scripts only after a flow is already understood and repeatable. Use
 Codex-in-the-loop interaction when judgment is still required.
@@ -75,6 +131,11 @@ one more question:
 
 4. has the exact target state been visibly confirmed on the LCD immediately
    before this commit action?
+
+If progress stalls, add one more escalation question:
+
+5. have I now failed this same kind of step about three times, and if so, what
+   is the smallest operation I can prove next?
 
 ## Operating Principle
 
@@ -174,8 +235,10 @@ Target posture:
 - `findings/`: reverse-engineering notes and discovered screen flows
 - `findings/firmware/mpc2000xl-data-wheel-re.md`: focused firmware-side note
   for the MPC2000XL data wheel path
-- `scripts/mpc_lcd_reader.py`: BMFont-based helper for reading native `248x60`
-  MPC LCD screenshots without relying on generic OCR
+- `scripts/mpc_lcd_reader.py`: template-based helper for reading native
+  `248x60` MPC LCD screenshots without relying on generic OCR; supports both
+  the VMPC BMFont path for MPC2000XL and the extracted `hd61830.bin` font path
+  for MPC60 text-mode screens
 - `scripts/probes/uk8/`: durable one-off probe scripts kept because they were
   useful for validating the MPC60 `.SET` pad sweep and dial-cadence behavior
 
@@ -214,21 +277,20 @@ For normal interactive `mpc2000xl` work, use the wrapper script:
 This starts `mpc2000xl` in a window using the hacked MAME binary in
 `/Users/izmar/git/mame`, with the Lua console enabled.
 
-To stop a running `mpc2000xl` session, use:
+To stop a running `mpc2000xl` session, use the live MAME console:
 
-```sh
-/Users/izmar/git/codex-mame/stop_mpc2000xl.sh
+```lua
+manager.machine:exit()
 ```
+
+`stop_mpc2000xl.sh` is a non-destructive preflight helper: it succeeds only
+when no matching instance is running, and refuses to stop one externally.
 
 To count currently running `mpc2000xl` instances, use:
 
 ```sh
 /Users/izmar/git/codex-mame/count_mpc2000xl.sh
 ```
-
-Shutdown is currently `SIGKILL`-based. The stop helper loops until the count is
-zero, because graceful shutdown through the PTY/live-console bridge is not
-reliable yet.
 
 Equivalent raw command:
 
@@ -257,11 +319,14 @@ This starts `mpc3000` in a window using the hacked MAME binary in
 `/Users/izmar/git/mame`, with the Lua console enabled. If
 `/tmp/mpc3000_work.img` exists, it is attached automatically as `-flop`.
 
-To stop a running `mpc3000` session, use:
+To stop a running `mpc3000` session, use the live MAME console:
 
-```sh
-/Users/izmar/git/codex-mame/stop_mpc3000.sh
+```lua
+manager.machine:exit()
 ```
+
+`stop_mpc3000.sh` is a non-destructive preflight helper: it succeeds only
+when no matching instance is running, and refuses to stop one externally.
 
 To count currently running `mpc3000` instances, use:
 
@@ -367,6 +432,15 @@ mpcprobe.queue_status()
 mpcprobe.queue_clear()
 ```
 
+Important autorun rule:
+
+- ordinary live sessions must not depend on ambient `/tmp` state
+- scripted probe runs should use explicit invocation only
+- use either MAME's `-autoboot_script /absolute/path.lua` or
+  `mpcprobe.run_script("/absolute/path.lua")`
+- if one helper script wants another script to run, that linkage must be
+  explicit rather than "file exists, therefore run it"
+
 These commands are executed over subsequent emulated frames by the plugin, so
 they are practical for exploratory reverse engineering from the live MAME
 console.
@@ -432,8 +506,8 @@ Practical rule:
 - if the console echoes a line but prints no `mpcprobe:` output at all, treat
   that run as suspicious
 - first verify with a minimal command such as `mpcprobe.queue_status()`
-- if it still does not execute, restart via `stop_mpc2000xl.sh` and
-  `run_mpc2000xl.sh` before assuming a scripting or reverse-engineering error
+- if it still does not execute, cleanly exit with `manager.machine:exit()`
+  and relaunch before assuming a scripting or reverse-engineering error
 
 At the time this was written, the issue appeared transient and was not
 reproducible after a clean restart.

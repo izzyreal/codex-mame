@@ -6,6 +6,23 @@ These are intentionally more concrete than `README.md`. If a workflow is known
 and repeatable, it should be recorded here so future agents do not spend cloud
 time rediscovering basic button sequences.
 
+## Three-Strikes Escalation Rule
+
+If the same kind of step has failed about three times, stop working at that
+abstraction level.
+
+Required response:
+
+- stop broad improvisation
+- stop adding more speculative scripts or environment changes
+- reduce the task to one minimal operation
+- verify the exact machine state before and after that operation
+- identify the narrowest unresolved factual question
+- proceed only from newly proven facts
+
+This is the mandatory self-handholding mode for this workspace. It should start
+before the human has to intervene and provide that handholding manually.
+
 ## Full-Screen Reading Rule
 
 Before changing strategy, read the whole LCD like a human would.
@@ -34,6 +51,66 @@ Preferred pattern:
 - only escalate to environment changes after the live on-screen path is truly
   exhausted
 
+## Storage Browser Rule
+
+Treat the device's file browser as authoritative.
+
+Rules:
+
+- before any load, save, erase, rename, or `DO IT` action, confirm the current
+  file name, size, and highlighted state from the LCD
+- do not infer the intended target from the host-mounted disk image, from an
+  earlier session, or from what the directory "should" contain
+- if the host filesystem and the device browser appear to disagree, trust the
+  device browser and keep navigating there until the discrepancy is understood
+- on macOS, assume host metadata noise such as `fseventsd` or sidecar artifacts
+  may exist; navigate around them on the device instead of treating them as a
+  reason to mutate the disk image immediately
+- host-side disk editing is an escalation step, not a first response to an
+  unexpected file listing
+
+Interpretation rule:
+
+- the question is not "what files did the host write?" but "what file does
+  the device say is currently selected?"
+
+## Disk Image Discipline Rule
+
+Disk-image work is a high-risk area. Use stricter discipline than for ordinary
+screen navigation.
+
+Rules:
+
+- treat raw images, CHD containers, extracted raws, backups, and diffs as
+  different artifact classes
+- give each artifact class an explicit filename; never rely on extensions alone
+- never overwrite a container path with extracted raw media
+- before any reuse, verify image size and file type from the host side
+- prefer direct raw-image inspection and deterministic image editing over
+  mounting in macOS
+- do not mount MPC working images in macOS unless there is no better option
+- if the MPC already formatted a working image, preserve that artifact and make
+  a backup before host-side mutation
+
+Practical lesson:
+
+- if a file named `*.chd` starts with a FAT boot sector instead of `MComprHD`,
+  the path has already stopped being a CHD container and must not be treated as
+  one
+
+## Clean Exit Rule
+
+The default shutdown path must be a clean MAME exit.
+
+Required rule:
+
+- use `manager.machine:exit()` from the live console
+- do not use `kill`, `kill -9`, or wrapper cleanup as the shutdown path
+
+Interpretation rule:
+
+- a clean exit is part of the probe, not an optional cleanup detail
+
 ## UI Editing Rule Of Thumb
 
 On this MPC UI family, if a field can be highlighted, it can be edited.
@@ -60,6 +137,29 @@ Mapping:
 This should be treated as a fixed positional rule when interpreting labels on
 the LCD.
 
+Additional rule for MPC-family screens:
+
+- the first assumption for any text on the bottom LCD row should be "these are
+  soft-key labels"
+- do not initially read bottom-row text as passive status text unless direct
+  observation disproves the soft-key interpretation
+
+## Instance Hygiene Rule
+
+Exactly one live emulator instance is a precondition for trustworthy probing.
+
+Rules:
+
+- before launching, verify the current instance count
+- after launching, verify that the count is exactly one
+- before trusting any screenshot, queue submission, or observed input effect,
+  re-check that no stale sibling instance exists
+- if more than one instance exists, stop the probe and cleanly exit instances
+  from their live consoles before restarting from a known single-instance state
+
+This is not optional. Mixed observations from multiple instances invalidate the
+probe.
+
 ## Load File Via Directory Window
 
 Applies to loading files from the MPC storage browser, including cases where the
@@ -70,8 +170,10 @@ Critical rule:
 - before pressing `DO IT` or any equivalent confirm/load soft key, explicitly
   verify that the LOAD screen `File:` field matches the intended target
   filename
-- never rely on remembered cursor position, assumed directory state, or a
-  previous successful run
+- also verify any available contextual clue such as file size, extension, or
+  neighboring browser state if that distinction matters
+- never rely on remembered cursor position, assumed directory state, host-side
+  filesystem expectations, or a previous successful run
 - if the target filename is not visibly confirmed, the run is not ready to
   continue
 
@@ -258,6 +360,217 @@ Concrete MPC3000 example:
 Once the literal meaning of a control is clear, treat it as fixed unless direct
 observation disproves it.
 
+## MPC60 Save Discipline
+
+Do not treat MPC60 save screens as proof that a file will be written.
+
+Observed failure mode:
+
+- `Save a sequence` on `1-(Unused)` is a silent no-op
+- the screen remains stable and gives no useful confirmation
+- repeated probing can waste time if the sequence state itself is never
+  questioned
+
+Required rule:
+
+1. before debugging a save path, verify that the sequence or song being saved
+   is actually used
+2. for sequences, the fastest reliable proof is to enter `Step Edit` and insert
+   one visible event
+3. verify on the LCD that the sequence is no longer `(Unused)`
+4. only then enter the save flow
+
+Concrete confirmed MPC60 path:
+
+1. from main, open `Step Edit`
+2. press `Soft Key 1` once for `<Insert>`
+3. verify a note row is visible
+4. press `Disk`
+5. continue into `Save a sequence` or `Save all seqs/songs`
+
+## MPC60 SCSI Firmware Split
+
+Treat `mpc60scsi` BIOS variants as materially different environments.
+
+Confirmed distinction:
+
+- `v212` exposes only floppy-oriented disk functions
+- `v214` exposes the hard-disk formatting and SCSI save/load workflow
+
+Operational rule:
+
+- if the goal is to probe MPC60 SCSI hard-disk behavior, use `mpc60scsi` with
+  BIOS `v214`
+- do not assume findings from `v214` generalize to `v212`
+- record the BIOS alongside any captured file artifact or UI finding
+
+## MPC60 SCSI Boot Readiness
+
+Do not reuse the MPC2000XL or floppy-MPC60 "ready" screen signature for
+`mpc60scsi`.
+
+Observed failure mode:
+
+- `wait_for_sequencer_ready()` timed out even though the machine had finished
+  booting normally
+- the root cause was not a broken boot flow, but an incorrect expectation that
+  the SCSI firmware would land on the same hashed LCD state as other MPC
+  environments
+
+Required rule:
+
+- treat MPC60 SCSI boot readiness as its own signature family
+- when in doubt, prefer:
+  1. a conservative fixed boot wait
+  2. then an actual LCD snapshot
+  3. then branching from the visible screen
+- only introduce a hashed ready-state helper after confirming the exact
+  post-boot LCD state for that specific firmware / device combination
+
+## MPC60 SCSI Hard-Disk Bring-Up
+
+Minimal confirmed flow for a fresh raw hard disk image:
+
+1. boot `mpc60scsi` with BIOS `v214` and an attached raw hard-disk image
+2. press `Disk`
+3. press `9` for `Other functions`
+4. press `2` for `Format hard disk`
+5. advance through each warning/confirm screen with `Soft Key 1`
+6. after formatting, verify the disk through `Disk` -> `6` `Load/erase/rename`
+7. do not proceed to save probing until that screen shows:
+   `Disk:HARD DISK Part A`
+
+Do not assume a newly attached image is usable before the MPC60 itself formats
+it.
+
+## MPC60 SCSI Song Mode Entry Context
+
+On `mpc60scsi` BIOS `v214`, the screen you get from `Song Mode` depends on the
+screen context you came from.
+
+Confirmed distinction:
+
+- `Step Edit -> Song Mode` lands in a different song-subfield state
+- `Step Edit -> Main Screen -> Song Mode` lands on the stable baseline needed
+  for repeatable song probing
+
+Required rule:
+
+- after creating a used sequence in `Step Edit`, return to `Main Screen`
+  before entering `Song Mode`
+- do not assume two visually similar `Song Mode` screens are semantically the
+  same; compare the exact active field before continuing
+
+## MPC60 SCSI v214 Song-Bearing ALL Path
+
+Minimal confirmed path to write a song-bearing `ALL_SEQS.ALL` on the SCSI hard
+disk:
+
+1. boot `mpc60scsi` with BIOS `v214` and a formatted raw hard-disk image
+2. open `Step Edit`
+3. press `Soft Key 1` once for `<Insert>` so the current sequence becomes used
+4. return to `Main Screen`
+5. press `Song Mode`
+6. press `Down Arrow`
+7. press `Right Arrow`
+8. press `+`
+9. verify the LCD now shows:
+   `Songs: 1-SONG01`
+   `Sanc: 1-SEQ01`
+   `Reps: 1`
+   `Tempo: 120.0 BPM`
+   `Bars: 2`
+10. press `Disk`
+11. press `2` for `Save All Sequences & Songs`
+12. press `Soft Key 1` for `<Save it to disk>`
+
+Confirmed artifact:
+
+- extracted file: `/tmp/MPC60_v214_song01.ALL`
+- size: `339` bytes
+- byte-identical to the earlier manually named capture
+  `/tmp/MPC60_v214_song_init.ALL`
+
+Important warning:
+
+- a later `Right Arrow -> +` from that `SONG01` state does **not** create a
+  second song record
+- the saved file differs by only one byte, changing the final song-step
+  `repeats` field from `0x01` to `0x02`
+
+## MPC60 SCSI v214 Song-Step Mutation Path
+
+Another confirmed path from the `SONG01 / SEQ01` state mutates the current
+song body rather than creating another song:
+
+1. starting from the confirmed `SONG01 / SEQ01 / Reps 1` state
+2. press `Up Arrow`
+3. press `+`
+4. press `Down Arrow`
+5. press `+`
+6. save `ALL_SEQS.ALL`
+
+Confirmed artifact:
+
+- extracted file: `/tmp/MPC60_v214_song2candidate.ALL`
+- size: `341` bytes
+
+Interpretation:
+
+- this path does **not** create song `2`
+- it changes the existing song body to `step_count = 2`
+- observed song steps become:
+  - step 1: `sequence_number = 2`, `repeats = 1`
+  - step 2: `sequence_number = 1`, `repeats = 1`
+
+Operational rule:
+
+- when probing song editing, do not infer "song count changed" merely because
+  a highlighted numeric field changed somewhere on the LCD
+- confirm by saving and inspecting the resulting `ALL` tail
+
+## Current MPC60 SCSI Song-Editing Boundary
+
+As of the current probes, the following are confirmed:
+
+- seq-only `v214` ALL wrapper
+- song-bearing `v214` ALL with one song record
+- `repeats` mutation within that song
+- conversion from one-step song body to two-step song body
+
+The following is still **not** confirmed:
+
+- the exact live UI path that creates a genuine second song record in
+  `mpc60scsi v214`
+
+Working rule:
+
+- treat "real multi-song creation" as an open reverse-engineering task
+- do not assume any candidate cursor state is the `Songs:` selector unless a
+  saved `ALL` proves that an additional song record was emitted
+
+## Autorun Hygiene
+
+Ambient autorun pickup is a bad pattern.
+
+Observed failure mode from the old design:
+
+- a new MAME session unexpectedly replays an old probe script
+- the machine performs unrelated actions and exits
+- the resulting behavior looks like flaky emulator control even though the
+  actual cause is stale ambient state in `/tmp`
+- this can waste large amounts of time
+
+Required rule:
+
+- ordinary live sessions must not pick up probe scripts from ambient state
+- scripted probes must use explicit invocation
+- if one script needs another script, the relationship must be explicit via
+  parameters, environment, or a direct file path chosen by the caller
+- do not design future helpers around "if file X happens to exist, run it"
+- if a session unexpectedly drives itself, treat that as a design bug to remove,
+  not a normal condition to work around
+
 Concrete MPC3000 example:
 
 - `Soft Key 1` labeled `Insert` inserts
@@ -310,6 +623,10 @@ task.
    Ensure exactly one emulator instance is running before and after each probe.
    Do not trust observations if more than one instance exists.
 
+11. Treat device-side file listings as facts and host-side file listings as hints.
+   Navigate the file browser the machine actually shows. Do not substitute host
+   filesystem expectations for observed device state.
+
 ## Escalation Ladder
 
 ## LCD Reading
@@ -317,11 +634,16 @@ task.
 - Always confirm the snapshot provenance before decoding it. A stale file name can waste a whole OCR/debug pass.
 - For MPC2000XL LCD work, prefer fresh native `248x60` MAME captures over inherited or scaled crops.
 - The VMPC bitmap font is the right first reference for OCR work, because the glyphs themselves match well.
+- For MPC60 text-mode LCD work, prefer the extracted HD61830 chargen ROM
+  (`/Users/izmar/git/mame/roms/hd61830.bin`) over borrowed font templates.
 - If decoding fails, first suspect stale snapshot provenance or wrong sampling geometry before blaming the font.
 - The hard part is usually exact field origin, padding, border overlap, and inversion state, not the letterforms themselves.
 - For browser-like screens, use supervised template learning from a fresh calibration snapshot and then score whole candidate strings against later snapshots.
 - When a row or field becomes highlighted, treat that as an inversion problem, not as a different font.
 - If a calibrated decoder degrades after selection moves, add the new state as another calibration sample instead of inventing a new interaction theory.
+- Two-tone PNG captures should be decoded as exact two-level images; do not use
+  a hardcoded grayscale threshold when the image already exposes exactly two
+  visible gray values.
 
 When a probe slows down, do not jump directly from live interaction to a totally
 new setup. Escalate in this order:

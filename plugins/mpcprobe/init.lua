@@ -15,7 +15,6 @@ local action_state = nil
 local DEFAULT_POLL_FRAMES = 40
 local DEFAULT_CHANGE_POLL_FRAMES = 4
 local SEQUENCER_READY_SIG = "66ace03b"
-local AUTORUN_PATH = "/tmp/mpcprobe_autorun.lua"
 local analog_field_state = {}
 
 local function current_screen_signature()
@@ -237,6 +236,25 @@ end
 local function dump_screen(prefix)
     local path = prefix or "mpcprobe_screen.png"
     snapshot_to_path(path)
+end
+
+local function run_script(path)
+    if not path or path == "" then
+        emu.print_error("mpcprobe: run_script requires a path")
+        return false
+    end
+    local chunk, err = loadfile(path)
+    if not chunk then
+        emu.print_error("mpcprobe: could not load script " .. path .. ": " .. tostring(err))
+        return false
+    end
+    emu.print_info("mpcprobe: running script " .. path)
+    local ok, run_err = pcall(chunk)
+    if not ok then
+        emu.print_error("mpcprobe: script failed: " .. tostring(run_err))
+        return false
+    end
+    return true
 end
 
 local function enqueue_action(action)
@@ -736,18 +754,11 @@ function mpcprobe.startplugin()
             queue_clear_field = queue_clear_field,
             dial = queue_dial,
             queue_clear = queue_clear,
-            queue_status = queue_status
+            queue_status = queue_status,
+            run_script = run_script
         }
         emu.print_info("mpcprobe: ready")
-        emu.print_info("mpcprobe: use mpcprobe.dump_ports(), mpcprobe.combo(\"Shift\", \"3 / Load\"), mpcprobe.tap(\"Window\"), mpcprobe.wait_change(), mpcprobe.wait_stable(), mpcprobe.wait_sequencer_ready(), mpcprobe.dial(3), mpcprobe.snap(\"lcd.png\"), mpcprobe.queue_status()")
-        local autorun = loadfile(AUTORUN_PATH)
-        if autorun then
-            emu.print_info("mpcprobe: running autorun script " .. AUTORUN_PATH)
-            local ok, err = pcall(autorun)
-            if not ok then
-                emu.print_error("mpcprobe: autorun failed: " .. tostring(err))
-            end
-        end
+        emu.print_info("mpcprobe: use mpcprobe.dump_ports(), mpcprobe.combo(\"Shift\", \"3 / Load\"), mpcprobe.tap(\"Window\"), mpcprobe.wait_change(), mpcprobe.wait_stable(), mpcprobe.wait_sequencer_ready(), mpcprobe.dial(3), mpcprobe.snap(\"lcd.png\"), mpcprobe.queue_status(), mpcprobe.run_script(\"/path/to/script.lua\")")
     end)
 end
 

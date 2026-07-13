@@ -5,6 +5,8 @@ Purpose:
 - decode `248x60` native-LCD MAME screenshots using the existing
   `editables/mpc` BMFont assets
 - avoid visual guessing when verifying MPC2000XL screen text
+- keep the BMFont path stable even as other MPC models gain different font
+  sources
 
 Current references:
 
@@ -86,3 +88,10 @@ Operational MAME note:
   `/Users/izmar/git/mame/mame ... mpc2000xl`
 - stale windows launched as `./mame ... mpc2000xl` were missed by that pattern
 - future process-matching logic must handle both forms
+
+Compatibility note:
+
+- `scripts/mpc_lcd_reader.py` now also supports an MPC60-specific template
+  source via `--hd61830-rom`, but the original `--font-fnt` + `--font-bmp`
+  BMFont path remains the intended MPC2000XL flow and should continue to be
+  validated against the known-good examples above.
