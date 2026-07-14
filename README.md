@@ -243,6 +243,10 @@ Target posture:
   observe -> interpret -> act loops. Its file-browser flow samples a short
   blink window so highlighted filenames are read from a frame where the cursor
   block is not hiding text, instead of relying on filename heuristics.
+- `scripts/mpc3000_live_controller.py`: host-side MPC3000 bridge controller
+  for observe -> interpret -> act loops. It reuses the HD61830 font-template
+  LCD reader and the shared bridge command script. The default BIOS is `v310`,
+  which is the initial target for files using the MPC3000 SEQ v3 container.
 - `scripts/probes/uk8/`: durable one-off probe scripts kept because they were
   useful for validating the MPC60 `.SET` pad sweep and dial-cadence behavior
 
@@ -372,6 +376,23 @@ The `mpcprobe.dial(n)` helper now supports both:
 
 - `mpc2000xl`, via the digital `Data Wheel +/-1` fields
 - `mpc3000`, via its analog `Dial` field with absolute-step synthesis
+
+For agentic MPC3000 probing, use the live controller:
+
+```sh
+/Users/izmar/git/codex-mame/scripts/mpc3000_live_controller.py observe --exit
+```
+
+The controller defaults to BIOS `v310`, attaches `/tmp/mpc3000_work.img` as a
+floppy image, reads the 40-column LCD through the extracted HD61830 font, and
+automatically dismisses the boot-time `Searching SCSI for hard disk... <Cancel>`
+prompt with soft key 4. Use `--bios default`, `--bios v311`, or
+`--bios vailixi` when a different firmware family is the actual target.
+
+Use `--headless` for fast repeatable probes. Visible runs should remain
+windowed through explicit `-window -nomaximize`; if a visible run appears
+fullscreen, treat that as a wrapper/controller regression before doing real
+reverse-engineering work.
 
 ## Batch port dump
 

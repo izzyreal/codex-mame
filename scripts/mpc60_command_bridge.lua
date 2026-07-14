@@ -80,7 +80,8 @@ local function execute(command, arg)
     elseif command == "wait_stable" then
         actions.wait_for_stable(2, tonumber(arg) or 20, 40)
     elseif command == "exit" then
-        manager.machine:exit()
+        -- The caller needs an acknowledgement before MAME starts shutting
+        -- down; otherwise the bridge client can time out while MAME exits.
     else
         error("unknown command: " .. tostring(command))
     end
@@ -104,6 +105,7 @@ while true do
                 write_file(response_path, id .. "|error|" .. tostring(err) .. "\n")
             end
             if command == "exit" then
+                manager.machine:exit()
                 break
             end
         end

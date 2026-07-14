@@ -14,6 +14,8 @@ cd "$MAME_DIR"
 if [ -f "$FLOP_IMAGE" ]; then
   exec "$MAME_BIN" \
     -window \
+    -nomaximize \
+    -resolution 3307x800 \
     -console \
     -snapview native \
     -skip_gameinfo \
@@ -25,6 +27,8 @@ fi
 
 exec "$MAME_BIN" \
   -window \
+  -nomaximize \
+  -resolution 3307x800 \
   -console \
   -snapview native \
   -skip_gameinfo \
