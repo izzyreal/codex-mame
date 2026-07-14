@@ -88,6 +88,12 @@ Keep one MPC3000 instance open while probing related values. Prefer changing
 several values, saving under distinct names, and clean-exiting once over
 restart-per-probe loops.
 
+Treat popup confirmations as ordinary soft-key screens unless proven
+otherwise. Read the LCD, identify the visible soft-key labels such as
+`<Yes>` / `<No>` or `<Do it>`, press the matching soft key, and verify the
+resulting screen change. Do not escalate a popup into a workflow problem or
+restart the session before first applying that rule.
+
 Before inspecting an attached floppy image, cleanly exit MAME and verify the
 instance count is zero. Do not read probe conclusions from an image while MAME
 may still be flushing writes.
