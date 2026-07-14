@@ -3,6 +3,13 @@
 The MPC3000 can be operated with the same observe -> interpret -> act discipline
 used for the MPC60 and MPC2000XL.
 
+Before using any of the controller details below, first read:
+
+- `/Users/izmar/git/codex-mame/findings/mpc3000-current-contract.md`
+
+That file defines the current slice's canonical launcher, control mode, image
+path, and the non-canonical paths that must not be mixed in silently.
+
 ## Controller
 
 Use:

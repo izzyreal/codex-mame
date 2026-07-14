@@ -3,6 +3,47 @@
 Minimal MAME automation workspace for probing Akai MPC machines, currently
 centered on `mpc2000xl` and `mpc3000`.
 
+## Machine Contracts
+
+Read this section before touching any machine.
+
+### MPC3000 Current Contract
+
+Current canonical contract for agentic MPC3000 reverse-engineering work:
+
+- control mode:
+  `/Users/izmar/git/codex-mame/scripts/mpc3000_live_controller.py`
+  via its bridge-backed workflow
+- canonical launcher for agentic work:
+  `.../scripts/mpc3000_live_controller.py hold` or another explicit controller
+  subcommand
+- current default probe image for the active MPC3000 PGM slice:
+  `/tmp/mpc3000_work.img`
+- current firmware family for this slice:
+  BIOS `v310` unless the slice explicitly says otherwise
+- canonical LCD reader:
+  `scripts/mpc_lcd_reader.py` through the controller / bridge client
+
+Do not silently switch any of these during a slice.
+
+In particular:
+
+- do not start with `run_mpc3000.sh` and then assume bridge control exists
+- do not start with the bridge-backed controller and then assume plain live
+  `-console` control is the active path
+- do not silently switch between `/tmp/mpc3000_work.img` and any larger or
+  different image
+- if a slice truly requires a different image, write the exact new canonical
+  path first in `findings/mpc3000-current-contract.md`, then proceed
+
+The current slice-specific contract is tracked in:
+
+- `/Users/izmar/git/codex-mame/findings/mpc3000-current-contract.md`
+
+For the active MPC3000 PGM reverse-engineering slice, also read:
+
+- `/Users/izmar/git/codex-mame/findings/mpc3000-pgm-probe.md`
+
 ## Start Here
 
 If you are resuming this workspace after a long gap or after context
