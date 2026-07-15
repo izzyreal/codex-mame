@@ -52,6 +52,36 @@ def print_rows(rows: list[str]) -> None:
         print(row)
 
 
+def merge_row_variants(rows_variants: list[list[str]]) -> list[str]:
+    if not rows_variants:
+        return []
+    merged: list[str] = []
+    row_count = max(len(rows) for rows in rows_variants)
+    for row_idx in range(row_count):
+        variants = [rows[row_idx] if row_idx < len(rows) else "" for rows in rows_variants]
+        width = max(len(v) for v in variants)
+        chars: list[str] = []
+        for col in range(width):
+            candidates = [v[col] if col < len(v) else " " for v in variants]
+            non_blank = [c for c in candidates if c not in {" ", "_", "?"}]
+            if non_blank:
+                counts: dict[str, int] = {}
+                for c in non_blank:
+                    counts[c] = counts.get(c, 0) + 1
+                chars.append(sorted(counts.items(), key=lambda kv: (kv[1], kv[0]))[-1][0])
+                continue
+            non_space = [c for c in candidates if c != " "]
+            if non_space:
+                counts = {}
+                for c in non_space:
+                    counts[c] = counts.get(c, 0) + 1
+                chars.append(sorted(counts.items(), key=lambda kv: (kv[1], kv[0]))[-1][0])
+            else:
+                chars.append(" ")
+        merged.append("".join(chars).rstrip())
+    return merged
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("bridge_dir", type=Path)
@@ -86,8 +116,13 @@ def main() -> int:
     if args.command == "observe":
         module = load_controller_module()
         decoder = module.Hd61830LcdDecoder(hd61830_rom=module.HD61830_ROM)
-        print(client.command("snap", str(args.path)))
-        rows = decoder.read_rows(args.path)
+        rows_variants: list[list[str]] = []
+        for idx in range(6):
+            sample_path = args.path if idx == 0 else args.path.with_name(f"{args.path.stem}-{idx}{args.path.suffix}")
+            print(client.command("snap", str(sample_path)))
+            rows_variants.append(decoder.read_rows(sample_path))
+            time.sleep(0.08)
+        rows = merge_row_variants(rows_variants)
         print(f"screen={module.classify_screen(rows)}")
         print_rows(rows)
         return 0
@@ -99,4 +134,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

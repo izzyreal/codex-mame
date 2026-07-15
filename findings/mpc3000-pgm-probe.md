@@ -121,11 +121,17 @@ That settles:
 
 ## Remaining Ambiguities
 
-Still worth probing live:
+No currently blocking structural ambiguity remains in the `mpc3000.pgm.v3`
+layout.
 
-- byte `15` (`filter_resonance`)
-  - Roger doc says `0..100`
-  - public MPC3000 manual wording suggested a smaller UI range
+The last open question from this slice, byte `15` (`filter_resonance`), was
+resolved from the MPC3000 manual's Dynamic Filter section:
+
+- `Reson` is the filter resonance field
+- visible range is `0..15`
+
+At this point, further PGM work is more about exhaustive behavioural parity and
+adjacent APS/consumer mapping than about unknown binary structure.
 
 ## Operational Caveat
 
